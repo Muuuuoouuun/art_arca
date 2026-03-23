@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { exhibitions, getExhibition } from "../../../lib/data";
 import AnimatedContainer from "../../../components/AnimatedContainer";
 
@@ -49,12 +50,22 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
           <p className="text-lg md:text-2xl font-serif italic text-stone-500">{ex.titleKo}</p>
         </header>
 
-        {/* Full-width Placeholder Image */}
+        {/* Hero Image */}
         <div className="px-8 md:px-24 mb-16">
-          <div
-            className="w-full aspect-[16/7]"
-            style={{ backgroundColor: "hsl(30, 8%, 82%)" }}
-          />
+          <div className="w-full aspect-[16/7] relative overflow-hidden">
+            {ex.heroImage ? (
+              <Image
+                src={ex.heroImage}
+                alt={`${ex.title} — ${ex.titleKo}`}
+                fill
+                className="object-cover"
+                sizes="100vw"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full" style={{ backgroundColor: "hsl(30, 8%, 82%)" }} />
+            )}
+          </div>
         </div>
 
         {/* Content Grid */}
@@ -117,8 +128,18 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
             {related.map((rel) => (
               <Link key={rel.id} href={`/exhibitions/${rel.id}`} className="group flex gap-6 items-start">
-                <div className="w-24 aspect-[3/4] bg-stone-200 flex-shrink-0 overflow-hidden">
-                  <div className="w-full h-full bg-stone-300 group-hover:scale-105 transition-transform duration-500" />
+                <div className="w-24 aspect-[3/4] flex-shrink-0 overflow-hidden relative bg-stone-200">
+                  {rel.image ? (
+                    <Image
+                      src={rel.image}
+                      alt={rel.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="96px"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-stone-300 group-hover:scale-105 transition-transform duration-500" />
+                  )}
                 </div>
                 <div>
                   <span className="text-[8px] uppercase tracking-[0.2em] text-stone-400">{rel.category}</span>

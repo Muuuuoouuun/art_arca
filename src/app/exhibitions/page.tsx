@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { exhibitions } from "../../lib/data";
 import AnimatedContainer from "../../components/AnimatedContainer";
 
@@ -47,21 +48,33 @@ export default function ExhibitionsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-20">
             {exhibitions.map((ex, i) => (
               <Link key={ex.id} href={`/exhibitions/${ex.id}`} className="group block">
-                {/* Placeholder Image */}
+                {/* Image */}
                 <div
                   className="aspect-[3/4] mb-6 overflow-hidden relative"
-                  style={{
-                    backgroundColor: `hsl(${(i * 47) % 360}, 10%, ${82 + (i % 3) * 4}%)`,
-                  }}
+                  style={
+                    !ex.image
+                      ? { backgroundColor: `hsl(${(i * 47) % 360}, 10%, ${82 + (i % 3) * 4}%)` }
+                      : undefined
+                  }
                 >
-                  <div
-                    className="absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
-                    style={{
-                      backgroundColor: `hsl(${(i * 47) % 360}, 8%, ${80 + (i % 3) * 4}%)`,
-                    }}
-                  />
+                  {ex.image ? (
+                    <Image
+                      src={ex.image}
+                      alt={ex.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <div
+                      className="absolute inset-0 group-hover:scale-105 transition-transform duration-700 ease-out"
+                      style={{
+                        backgroundColor: `hsl(${(i * 47) % 360}, 8%, ${80 + (i % 3) * 4}%)`,
+                      }}
+                    />
+                  )}
                   {ex.featured && (
-                    <div className="absolute top-4 left-4">
+                    <div className="absolute top-4 left-4 z-10">
                       <span className="text-[8px] uppercase tracking-[0.3em] bg-stone-900 text-white px-3 py-1.5">
                         Featured
                       </span>

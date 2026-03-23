@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getFeaturedExhibitions } from "../lib/data";
 import AnimatedContainer from "../components/AnimatedContainer";
 
@@ -49,8 +50,18 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-32">
             {featured.map((ex) => (
               <Link key={ex.id} href={`/exhibitions/${ex.id}`} className="group cursor-pointer block">
-                <div className="aspect-[4/3] bg-stone-200 mb-10 overflow-hidden">
-                  <div className="w-full h-full bg-stone-300 group-hover:scale-105 transition-transform duration-700 ease-out" />
+                <div className="aspect-[4/3] mb-10 overflow-hidden relative bg-stone-200">
+                  {ex.image ? (
+                    <Image
+                      src={ex.image}
+                      alt={ex.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-stone-300 group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  )}
                 </div>
                 <div className="flex justify-between items-start mb-6">
                   <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-stone-500">{ex.category}</span>
