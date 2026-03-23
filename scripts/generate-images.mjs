@@ -20,6 +20,22 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
+
+// Node.js 시스템 프록시 환경 지원 (HTTPS_PROXY / HTTP_PROXY)
+async function setupProxy() {
+  const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
+  if (!proxyUrl) return;
+  try {
+    // undici가 있으면 글로벌 dispatcher로 프록시 설정
+    const { ProxyAgent, setGlobalDispatcher } = await import("undici");
+    setGlobalDispatcher(new ProxyAgent(proxyUrl));
+    console.log(`   프록시 사용: ${proxyUrl.split("@").pop()}`);
+  } catch {
+    // undici가 없을 경우 무시 (로컬 환경에서는 보통 불필요)
+  }
+}
+await setupProxy();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
