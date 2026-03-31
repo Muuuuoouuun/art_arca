@@ -16,9 +16,9 @@ export default function BookmarksPage() {
   const saved = exhibitions.filter((ex) => bookmarks.includes(ex.id));
 
   return (
-    <div className="bg-[#030303] min-h-screen text-white relative overflow-hidden selection:bg-white selection:text-black">
+    <div className="bg-[#0F0F0F] min-h-screen text-white relative overflow-hidden selection:bg-white selection:text-black">
       <FilmGrain />
-      <BackgroundGlow color="bg-indigo-900" size="w-[1000px] h-[1000px]" className="top-[-300px] left-[-300px]" opacity={0.1} />
+      <BackgroundGlow color="bg-indigo-700" size="w-[1000px] h-[1000px]" className="top-[-300px] left-[-300px]" opacity={0.20} />
       
       <nav className="fixed top-0 left-0 w-full z-50 px-8 py-8 flex justify-between items-center mix-blend-difference">
         <Link href="/" className="text-lg font-serif tracking-[0.5em] hover:italic transition-all">ART HUB 4.2</Link>

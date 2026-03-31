@@ -33,12 +33,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-[#030303] min-h-screen text-white font-sans selection:bg-white selection:text-black relative overflow-hidden">
+    <div className="bg-[#0F0F0F] min-h-screen text-white font-sans selection:bg-white selection:text-black relative overflow-hidden">
       <FilmGrain />
-      
-      <BackgroundGlow color="bg-purple-600" size="w-[800px] h-[800px]" className="top-[-200px] left-[-200px]" opacity={0.1} />
-      <BackgroundGlow color="bg-blue-600" size="w-[600px] h-[600px]" className="top-[40vh] right-[-100px]" opacity={0.08} />
-      <BackgroundGlow color="bg-indigo-800" size="w-[1000px] h-[1000px]" className="bottom-[-300px] left-[10%]" opacity={0.12} />
+
+      <BackgroundGlow color="bg-purple-600" size="w-[800px] h-[800px]" className="top-[-200px] left-[-200px]" opacity={0.18} />
+      <BackgroundGlow color="bg-blue-600" size="w-[600px] h-[600px]" className="top-[40vh] right-[-100px]" opacity={0.15} />
+      <BackgroundGlow color="bg-indigo-800" size="w-[1000px] h-[1000px]" className="bottom-[-300px] left-[10%]" opacity={0.22} />
 
       <HomeNav activeSection={activeSection} />
       

@@ -14,6 +14,7 @@ import ReservationModal from "../../../components/ReservationModal";
 import ReviewForm from "../../../components/ReviewForm";
 import ReviewsList from "../../../components/ReviewsList";
 import GlassCard from "../../../components/GlassCard";
+import { OrnamentalDivider, LaurelAccent } from "../../../components/ClassicalOrnament";
 
 export async function generateStaticParams() {
   return exhibitions.map((ex) => ({ id: ex.id }));
@@ -39,9 +40,9 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
   const status = getExhibitionStatus(ex.period);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-white selection:text-black relative overflow-hidden">
+    <div className="bg-[#141414] min-h-screen text-white selection:bg-white selection:text-black relative overflow-hidden">
       <FilmGrain />
-      <BackgroundGlow color="bg-zinc-800" size="w-[1000px] h-[1000px]" className="top-[-500px] right-[-200px]" opacity={0.1} />
+      <BackgroundGlow color="bg-zinc-600" size="w-[1000px] h-[1000px]" className="top-[-500px] right-[-200px]" opacity={0.18} />
       
       {/* Dynamic Header */}
       <nav className="fixed top-0 left-0 w-full z-50 px-8 py-8 flex justify-between items-center mix-blend-difference">
@@ -52,8 +53,10 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
       {/* Editorial Hero */}
       <section className="relative h-[100vh] flex flex-col justify-end px-8 md:px-20 pb-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <ParallaxImage src={ex.heroImage!} alt={ex.title} className="opacity-40 grayscale hover:grayscale-0 transition-all duration-1000" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+          <ParallaxImage src={ex.heroImage!} alt={ex.title} className="opacity-60 grayscale-[40%] hover:grayscale-0 transition-all duration-1000" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
+          {/* Renaissance vignette overlay */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at center, transparent 30%, #050505 100%)" }} />
         </div>
         
         {/* Floating Iconic Object in Detail Hero */}
@@ -114,24 +117,33 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
           {/* Double Column Spread */}
           <div className="lg:col-span-8">
             <AnimatedContainer>
-               <h2 className="text-5xl md:text-7xl font-serif italic mb-24 text-zinc-300 leading-tight max-w-4xl">
-                 "{ex.description}"
-               </h2>
-               
-               <div className="lg:columns-2 gap-16 space-y-12 lg:space-y-0">
-                  {ex.longDescription.split('\n\n').map((p, i) => (
-                    <p key={i} className="text-xl md:text-2xl font-light text-zinc-400 leading-relaxed first-letter:text-8xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-white first-letter:leading-[0.8] mb-12 break-inside-avoid">
-                      {p}
-                    </p>
-                  ))}
+               {/* Description pull quote */}
+               <div className="relative mb-24">
+                 <span className="absolute -top-6 -left-4 text-[6rem] font-serif leading-none select-none pointer-events-none" style={{ color: "#C9A96E12" }}>❝</span>
+                 <h2 className="text-5xl md:text-7xl font-serif italic text-zinc-300 leading-tight max-w-4xl relative z-10">
+                   {ex.description}
+                 </h2>
+                 <OrnamentalDivider className="mt-10 max-w-sm" />
                </div>
 
-               <div className="mt-32 space-y-20 border-t border-white/5 pt-20">
-                  <div className="flex flex-col gap-8">
-                    <h3 className="text-3xl font-serif tracking-tight">Community Resonance</h3>
-                    <ReviewForm exhibitionId={ex.id} />
-                  </div>
-                  <ReviewsList exhibitionId={ex.id} />
+               <div className="lg:columns-2 gap-16 space-y-12 lg:space-y-0">
+                 {ex.longDescription.split('\n\n').map((p, i) => (
+                   <p key={i} className={`text-xl md:text-2xl font-light text-zinc-400 leading-relaxed mb-12 break-inside-avoid ${i === 0 ? "dropcap-gold" : "first-letter:text-5xl first-letter:font-serif first-letter:mr-2 first-letter:float-left first-letter:text-zinc-600 first-letter:leading-[0.9]"}`}>
+                     {p}
+                   </p>
+                 ))}
+               </div>
+
+               <div className="mt-32 space-y-20 pt-20" style={{ borderTop: "1px solid #C9A96E15" }}>
+                 <div className="flex flex-col gap-8">
+                   <div className="flex items-center gap-6">
+                     <h3 className="text-3xl font-serif tracking-tight">Community Resonance</h3>
+                     <OrnamentalDivider className="flex-1 max-w-xs" />
+                   </div>
+                   <LaurelAccent className="mb-2" />
+                   <ReviewForm exhibitionId={ex.id} />
+                 </div>
+                 <ReviewsList exhibitionId={ex.id} />
                </div>
             </AnimatedContainer>
           </div>
@@ -200,7 +212,7 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
 
       {/* Explore Further */}
       <section className="px-8 md:px-20 py-40 border-t border-zinc-900 relative">
-         <BackgroundGlow color="bg-blue-900" size="w-[800px] h-[800px]" className="bottom-[-400px] left-[-200px]" opacity={0.05} />
+         <BackgroundGlow color="bg-blue-700" size="w-[800px] h-[800px]" className="bottom-[-400px] left-[-200px]" opacity={0.12} />
          <AnimatedContainer className="mb-20">
             <h2 className="text-5xl font-serif uppercase tracking-tighter">THE <span className="italic text-zinc-500">RELATED</span> SELECTION</h2>
          </AnimatedContainer>
