@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getFeaturedExhibitions } from "../lib/data";
 import AnimatedContainer from "../components/AnimatedContainer";
+import BookmarkButton from "../components/BookmarkButton";
 
 export default function Home() {
   const featured = getFeaturedExhibitions();
@@ -20,8 +21,7 @@ export default function Home() {
         {/* Hero Impact Section */}
         <section className="px-8 md:px-24 py-24">
           <h1 className="text-[80px] md:text-[200px] font-serif leading-[0.85] tracking-tighter mb-16">
-            예술적<br />
-            침묵.
+            예술적<br />침묵.
           </h1>
           <div className="max-w-2xl">
             <p className="text-xl md:text-2xl font-light leading-snug mb-12 text-stone-700">
@@ -53,23 +53,20 @@ export default function Home() {
                 <div className="aspect-[4/3] mb-10 overflow-hidden relative bg-stone-200">
                   {ex.image ? (
                     <Image
-                      src={ex.image}
-                      alt={ex.title}
-                      fill
+                      src={ex.image} alt={ex.title} fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   ) : (
                     <div className="w-full h-full bg-stone-300 group-hover:scale-105 transition-transform duration-700 ease-out" />
                   )}
+                  <BookmarkButton exhibitionId={ex.id} variant="card" />
                 </div>
                 <div className="flex justify-between items-start mb-6">
                   <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-stone-500">{ex.category}</span>
                   <span className="text-[10px] font-mono tracking-tighter text-stone-400">{ex.date}</span>
                 </div>
-                <h3 className="text-4xl font-serif tracking-tight mb-3 group-hover:underline underline-offset-8">
-                  {ex.title}
-                </h3>
+                <h3 className="text-4xl font-serif tracking-tight mb-3 group-hover:underline underline-offset-8">{ex.title}</h3>
                 <p className="text-sm text-stone-500 tracking-wide mb-3">{ex.artist}</p>
                 <p className="text-sm text-stone-400 leading-relaxed">{ex.description}</p>
               </Link>
