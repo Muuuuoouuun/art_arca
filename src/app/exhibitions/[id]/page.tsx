@@ -101,7 +101,7 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
                </div>
                <div className="flex items-center gap-4 ml-auto">
                  <BookmarkButton exhibitionId={ex.id} variant="detail" />
-                 <ShareButtons title={ex.title} />
+                 <ShareButtons title={ex.title} titleKo={ex.titleKo} />
                </div>
             </div>
           </AnimatedContainer>

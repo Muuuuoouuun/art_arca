@@ -20,8 +20,6 @@ export default function ExhibitionActions({
   exhibitionTitleKo,
   exhibitionPeriod,
 }: Props) {
-  const [reservationOpen, setReservationOpen] = useState(false);
-
   return (
     <>
       {/* 좋아요 / 북마크 / 공유 */}
@@ -43,13 +41,10 @@ export default function ExhibitionActions({
       </section>
 
       {/* 예약 모달 */}
-      {reservationOpen && (
-        <ReservationModal
-          exhibitionTitle={exhibitionTitle}
-          exhibitionPeriod={exhibitionPeriod}
-          onClose={() => setReservationOpen(false)}
-        />
-      )}
+      <ReservationModal
+        exhibitionTitle={exhibitionTitle}
+        exhibitionPeriod={exhibitionPeriod}
+      />
     </>
   );
 }
@@ -62,23 +57,10 @@ export function ReservationTrigger({
   exhibitionTitle: string;
   exhibitionPeriod: string;
 }) {
-  const [open, setOpen] = useState(false);
-
   return (
-    <>
-      <button
-        onClick={() => setOpen(true)}
-        className="w-full text-[10px] uppercase tracking-[0.2em] bg-stone-900 text-white py-4 hover:bg-stone-700 transition-all"
-      >
-        방문 예약
-      </button>
-      {open && (
-        <ReservationModal
-          exhibitionTitle={exhibitionTitle}
-          exhibitionPeriod={exhibitionPeriod}
-          onClose={() => setOpen(false)}
-        />
-      )}
-    </>
+    <ReservationModal
+      exhibitionTitle={exhibitionTitle}
+      exhibitionPeriod={exhibitionPeriod}
+    />
   );
 }
