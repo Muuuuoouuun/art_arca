@@ -1,9 +1,11 @@
 import Link from "next/link";
 import AnimatedContainer from "../../components/AnimatedContainer";
+import FilmGrain from "../../components/FilmGrain";
+import BackgroundGlow from "../../components/BackgroundGlow";
 
 export const metadata = {
-  title: "About — Art Arca",
-  description: "Art Arca는 예술과 대중을 연결하는 독립적인 아트 큐레이션 플랫폼입니다.",
+  title: "About — Art Hub 4.1",
+  description: "Art Hub 4.1: Iconic Masterpiece Edition — A digital lens for the new curation frontier.",
 };
 
 const values = [
@@ -15,129 +17,133 @@ const values = [
   },
   {
     number: "02",
-    title: "예술과 대중의 거리",
+    title: "디지털 트윈 & 실체",
     description:
-      "예술은 특권이 아닙니다. 우리는 고급 미술의 언어를 해독 가능하게 만들면서도, 그 깊이와 복잡성을 잃지 않도록 균형을 찾습니다.",
+      "물리적 예술의 무게를 디지털 공간에 구현합니다. Art Hub 4.1은 초고해상도 렌더링과 딥 레이아웃 시스템을 통해 작품의 질감과 존재감을 보존합니다.",
   },
   {
     number: "03",
-    title: "시즌 기반 에디션",
+    title: "아이코닉 에디션",
     description:
-      "Art Arca는 계절과 함께 호흡합니다. 각 시즌 에디션은 그 계절의 감각을 담은 큐레이션으로, 예술이 시간 속에서 어떻게 살아 숨쉬는지를 보여줍니다.",
+      "계절을 넘어, 시대를 관통하는 마스터피스들을 다룹니다. 3D 아티팩트와 앰비언트 오디오를 결합하여 감각적인 전시 경험을 제공합니다.",
   },
 ];
 
 const team = [
-  { name: "김아현 Ah-Hyun Kim", role: "Founder & Chief Curator" },
-  { name: "이준혁 Jun-Hyuk Lee", role: "Artistic Director" },
-  { name: "박서연 Seo-Yeon Park", role: "Exhibition Coordinator" },
-  { name: "최한울 Han-Ul Choi", role: "Digital Experience" },
+  { name: "Ah-Hyun Kim", role: "Founder & Chief Curator" },
+  { name: "Maggie 매기", role: "Lead Visual Architect // Subagent" },
+  { name: "Jun-Hyuk Lee", role: "Artistic Director" },
+  { name: "Seo-Yeon Park", role: "Exhibition Coordinator" },
 ];
 
 export default function AboutPage() {
   return (
-    <AnimatedContainer>
-      <div className="bg-[#F2F0ED] min-h-screen text-[#1a1a1a]">
+    <div className="bg-[#030303] min-h-screen text-white relative overflow-hidden selection:bg-white selection:text-black">
+      <FilmGrain />
+      <BackgroundGlow color="bg-zinc-800" size="w-[1000px] h-[1000px]" className="top-[-400px] left-[-200px]" opacity={0.1} />
+
+      <AnimatedContainer>
         {/* Header */}
-        <header className="px-8 md:px-24 pt-28 pb-16 border-b border-stone-200">
-          <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 mb-6">About Art Arca</p>
-          <h1 className="text-5xl md:text-7xl font-serif tracking-tight leading-[0.9] max-w-4xl">
-            예술들의<br />집합체.
-          </h1>
+        <header className="px-8 md:px-24 pt-48 pb-24 border-b border-white/10 relative z-10">
+          <div className="max-w-[1800px] mx-auto">
+             <p className="text-[10px] uppercase tracking-[0.6em] text-zinc-500 mb-8 font-bold">Node 4.1 // Origin Story</p>
+             <h1 className="text-8xl md:text-[10vw] font-serif tracking-tighter leading-none font-bold uppercase">
+                Artistic<br /><span className="italic text-zinc-700">Vision.</span>
+             </h1>
+          </div>
         </header>
 
         {/* Mission Statement */}
-        <section className="px-8 md:px-24 py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+        <section className="px-8 md:px-24 py-40 relative z-10">
+          <div className="max-w-[1800px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
             <div>
-              <p className="text-2xl md:text-3xl font-light leading-relaxed text-stone-700">
-                예술과 대중, 대중과 예술.<br />
-                그 사이 어딘가에 Art Arca가 있습니다.
+              <p className="text-4xl md:text-5xl font-serif italic leading-tight text-zinc-300">
+                "예술의 영혼을 디지털 코드로 번역하는 과정에서 우리는 새로운 실체를 발견합니다."
               </p>
             </div>
-            <div className="space-y-6">
-              <p className="text-base leading-loose text-stone-600">
-                Art Arca는 2024년 서울에서 시작된 독립 아트 큐레이션 플랫폼입니다. 우리는 동시대 한국 미술을 중심으로, 회화, 조각, 사진, 영상, 사운드 아트까지 폭넓은 매체를 큐레이션합니다.
+            <div className="space-y-12">
+              <p className="text-xl leading-relaxed text-zinc-400 font-light">
+                Art Hub 4.1은 2026년 서울에서 시작된 독립 아트 큐레이션 플랫폼의 정점입니다. 우리는 동시대 예술과 역사적 아이콘을 결합하여, 단순한 갤러리 웹사이트를 넘어선 '디지털 박물관'을 지향합니다.
               </p>
-              <p className="text-base leading-loose text-stone-600">
-                'Arca'는 라틴어로 '궤', '보관함'을 뜻합니다. 예술이 잠시 머물다 가는 공간이 아니라, 소중히 보관되고 기억되는 장소를 꿈꿉니다.
+              <p className="text-xl leading-relaxed text-zinc-400 font-light">
+                우리의 딥 레이아웃 기술은 각 작품이 가진 서사를 공간적으로 배치하며, 아이코닉 오브젝트들은 물리적 한계를 벗어나 관람객의 화면 속에서 새롭게 숨 쉽니다.
               </p>
             </div>
           </div>
         </section>
-
-        {/* Horizontal Rule */}
-        <div className="px-8 md:px-24">
-          <div className="border-t border-stone-200" />
-        </div>
 
         {/* Values */}
-        <section className="px-8 md:px-24 py-24">
-          <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 mb-16 font-bold">
-            Our Values
-          </p>
-          <div className="space-y-0">
-            {values.map((val, i) => (
-              <div
-                key={val.number}
-                className={`grid grid-cols-1 md:grid-cols-3 gap-8 py-12 ${
-                  i < values.length - 1 ? "border-b border-stone-200" : ""
-                }`}
-              >
-                <div className="flex items-start gap-6">
-                  <span className="text-[9px] font-mono text-stone-300 mt-1">{val.number}</span>
-                  <h2 className="text-xl font-serif tracking-tight">{val.title}</h2>
-                </div>
-                <div className="md:col-span-2">
-                  <p className="text-base leading-loose text-stone-600">{val.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Horizontal Rule */}
-        <div className="px-8 md:px-24">
-          <div className="border-t border-stone-200" />
-        </div>
-
-        {/* Team */}
-        <section className="px-8 md:px-24 py-24">
-          <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 mb-16 font-bold">
-            Team
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
-            {team.map((member) => (
-              <div key={member.name} className="flex justify-between items-baseline py-6 border-b border-stone-100">
-                <span className="text-base font-serif">{member.name}</span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-stone-400">{member.role}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="px-8 md:px-24 py-24 bg-stone-900 text-white">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-serif tracking-tight mb-3">
-                Spring 2026 Collection
-              </h2>
-              <p className="text-stone-400 text-sm leading-relaxed">
-                이번 시즌의 전시들을 지금 만나보세요.
+        <section className="px-8 md:px-24 py-40 border-t border-white/5 relative z-10">
+           <div className="max-w-[1800px] mx-auto">
+              <p className="text-[10px] uppercase tracking-[0.6em] text-zinc-500 mb-24 font-bold uppercase">
+                Core Protocols
               </p>
-            </div>
-            <Link
-              href="/exhibitions"
-              className="text-[10px] uppercase tracking-[0.3em] border border-white text-white px-10 py-4 hover:bg-white hover:text-stone-900 transition-all whitespace-nowrap"
-            >
-              View Exhibitions
-            </Link>
+              <div className="space-y-0">
+                {values.map((val, i) => (
+                  <div
+                    key={val.number}
+                    className={`grid grid-cols-1 md:grid-cols-3 gap-12 py-20 ${
+                      i < values.length - 1 ? "border-b border-white/5" : ""
+                    } group`}
+                  >
+                    <div className="flex items-start gap-12">
+                      <span className="text-xl font-mono text-zinc-800 mt-1 group-hover:text-white transition-colors">{val.number}</span>
+                      <h2 className="text-4xl font-serif tracking-tight group-hover:italic transition-all">{val.title}</h2>
+                    </div>
+                    <div className="md:col-span-2">
+                      <p className="text-xl leading-relaxed text-zinc-500 group-hover:text-zinc-300 transition-colors font-light">{val.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+           </div>
+        </section>
+
+        {/* Team Grid */}
+        <section className="px-8 md:px-24 py-40 border-t border-white/5 relative z-10">
+          <div className="max-w-[1800px] mx-auto">
+             <p className="text-[10px] uppercase tracking-[0.6em] text-zinc-500 mb-24 font-bold">
+                The Architects
+             </p>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-4">
+                {team.map((member) => (
+                  <div key={member.name} className="flex justify-between items-end py-10 border-b border-white/5 group">
+                    <span className="text-2xl font-serif group-hover:text-shadow-glow transition-all">{member.name}</span>
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-mono group-hover:text-zinc-400 transition-colors font-bold">{member.role}</span>
+                  </div>
+                ))}
+             </div>
           </div>
         </section>
 
-        <div className="pb-0" />
-      </div>
-    </AnimatedContainer>
+        {/* CTA Blockbuster Style */}
+        <section className="px-8 md:px-24 py-40 relative z-10">
+           <div className="max-w-[1800px] mx-auto bg-white/[0.03] border border-white/10 rounded-[60px] p-24 overflow-hidden relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+              <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-16 text-center md:text-left">
+                <div>
+                  <h2 className="text-5xl md:text-7xl font-serif tracking-tight mb-8">
+                    Art Hub 4.1<br/><span className="italic text-zinc-500">Master Registry</span>
+                  </h2>
+                  <p className="text-zinc-500 text-xl font-light max-w-xl">
+                    가장 진보된 디지털 아트 큐레이션을 지금 바로 경험해 보세요. 아이코닉 에디션이 당신을 기다립니다.
+                  </p>
+                </div>
+                <Link
+                  href="/exhibitions"
+                  className="group relative px-16 py-8 overflow-hidden rounded-full border border-white/20 text-xs tracking-[0.4em] font-bold transition-all duration-700 hover:border-white"
+                >
+                  <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">ACCESS ARCHIVE</span>
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                </Link>
+              </div>
+           </div>
+        </section>
+
+        <footer className="py-20 text-center text-[10px] text-zinc-800 font-mono uppercase tracking-[0.5em]">
+           Art Hub 4.1 Architecture Spec-04 // All Systems Go.
+        </footer>
+      </AnimatedContainer>
+    </div>
   );
 }

@@ -1,0 +1,24 @@
+{
+  "project": {
+    "name": "art_hub",
+    "type": "Next.js",
+    "version": "1.0.0"
+  },
+  "ai": {
+    "prefer": "Codex",
+    "context_files": [
+      "CLAUDE.md",
+      "package.json",
+      "tsconfig.json"
+    ],
+    "rules_path": ".claude/rules/",
+    "commands_path": ".claude/commands/"
+  },
+  "hooks": {
+    "on_finish": "npm run lint"
+  },
+  "settings": {
+    "auto_commit": false,
+    "permission_mode": "manual"
+  }
+}

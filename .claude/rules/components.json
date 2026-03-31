@@ -1,0 +1,11 @@
+{
+  "name": "Component Style Rule",
+  "pattern": "src/components/**/*.tsx",
+  "rules": [
+    "Use functional components with React.FC or simple function components.",
+    "Apply Tailwind utility classes directly in the className attribute.",
+    "Avoid inline styles (style={...}) unless dynamically calculated.",
+    "Prefer atomic component structure where possible.",
+    "Ensure all components are properly exported."
+  ]
+}

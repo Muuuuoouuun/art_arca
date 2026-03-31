@@ -1,0 +1,13 @@
+{
+  "commands": {
+    "/build": {
+      "command": "npm run build",
+      "description": "Build the project and run linting.",
+      "auto_commit": false
+    },
+    "/dev": {
+      "command": "npm run dev",
+      "description": "Start the development server."
+    }
+  }
+}

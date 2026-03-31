@@ -13,256 +13,230 @@ export interface Exhibition {
   featured: boolean;
   image?: string;       // thumbnail path (3:4)
   heroImage?: string;   // hero/detail page image (16:7)
+  iconicObject?: {
+    name: string;
+    description: string;
+    image: string;
+  };
 }
 
 export const exhibitions: Exhibition[] = [
-  /* ─── 현재 진행 전시 ─── */
   {
-    id: "silence-and-form",
-    title: "Silence and Form",
-    titleKo: "침묵과 형태",
-    artist: "이지수 Ji-Su Lee",
-    category: "회화 / Painting",
-    date: "2026.03",
-    period: "2026.03.01 — 2026.04.30",
-    location: "Gallery A, 서울",
-    description: "공간과 여백이 만들어내는 새로운 언어",
-    longDescription:
-      "이지수 작가의 이번 개인전은 한국 전통 여백의 미학과 현대 미니멀리즘이 조우하는 지점을 탐구합니다. 캔버스 위의 침묵 — 그리지 않은 공간들이 오히려 더 강렬하게 말을 건넵니다. 관람객은 각자의 내면에서 그 여백을 채워나가는 경험을 하게 됩니다.\n\n작가는 10년간의 유럽 거주 경험을 통해 동서양 회화의 경계를 지워왔습니다. 이번 전시는 그 여정의 정점으로, 순수한 형태와 색채의 언어로만 소통하는 30여 점의 신작을 선보입니다.",
-    tags: ["미니멀리즘", "추상회화", "한국현대미술"],
-    featured: true,
-    image: "/images/exhibitions/silence-and-form-thumb.jpg",
-    heroImage: "/images/exhibitions/silence-and-form-hero.jpg",
-  },
-  {
-    id: "urban-fragments",
-    title: "Urban Fragments",
-    titleKo: "도시의 파편들",
-    artist: "박민준 Min-Jun Park",
-    category: "사진 / Photography",
-    date: "2026.03",
-    period: "2026.03.15 — 2026.05.15",
-    location: "Gallery B, 서울",
-    description: "도시의 틈새에서 발견한 익명의 아름다움",
-    longDescription:
-      "박민준 작가의 사진 시리즈 '도시의 파편들'은 5년에 걸쳐 서울, 도쿄, 베를린, 뉴욕의 골목과 틈새를 기록한 대규모 아카이브 프로젝트입니다. 우리가 무심코 지나치는 도시의 비가시적 영역들 — 벽의 균열, 빛의 각도, 시간의 흔적 — 이 하나의 완결된 미학적 언어로 재구성됩니다.\n\n흑백과 컬러를 교차하는 연출은 현재와 과거, 익명성과 특수성 사이의 긴장감을 시각화합니다.",
-    tags: ["다큐멘터리 사진", "도시사진", "아카이브"],
-    featured: true,
-    image: "/images/exhibitions/urban-fragments-thumb.jpg",
-    heroImage: "/images/exhibitions/urban-fragments-hero.jpg",
-  },
-  {
-    id: "material-memory",
-    title: "Material Memory",
-    titleKo: "물질의 기억",
-    artist: "최연지 Yeon-Ji Choi",
-    category: "조각 / Sculpture",
+    id: "afrofuturism-disco",
+    title: "Celestial Groove",
+    titleKo: "셀레스티얼 그루브: 아프로퓨처리즘과 디스코의 우주",
+    artist: "자야 지부 Jaya Jibu",
+    category: "디지털 콜라주 / Digital Collage",
     date: "2026.04",
-    period: "2026.04.01 — 2026.05.31",
-    location: "Gallery C, 서울",
-    description: "소멸하는 물질 안에 새겨진 시간의 층위",
-    longDescription:
-      "최연지 작가는 버려진 산업 소재들 — 녹슨 금속, 마모된 콘크리트, 낡은 직물 — 을 수집해 새로운 조각적 언어를 구성합니다. 각 오브제들은 자신만의 역사와 기억을 품고 있으며, 작가의 손을 거쳐 그 기억이 가시화됩니다.\n\n이번 전시는 15개의 대형 설치 조각으로 구성되며, 관람객은 물질의 시간성과 물리적 소멸이라는 주제를 몸으로 경험하게 됩니다.",
-    tags: ["설치미술", "재료미학", "환경미술"],
-    featured: false,
-    image: "/images/exhibitions/material-memory-thumb.jpg",
-    heroImage: "/images/exhibitions/material-memory-hero.jpg",
-  },
-  {
-    id: "threshold",
-    title: "Threshold",
-    titleKo: "경계",
-    artist: "김도현 Do-Hyun Kim",
-    category: "영상 / Video Art",
-    date: "2026.04",
-    period: "2026.04.10 — 2026.06.10",
-    location: "Gallery D, 서울",
-    description: "존재의 경계에서 바라본 자아와 타자",
-    longDescription:
-      "김도현 작가의 신작 비디오 설치 'Threshold'는 세 채널 영상과 입체 사운드로 구성된 몰입형 작품입니다. 한국 사회의 경계들 — 세대, 젠더, 계층 — 이 어떻게 개인의 정체성을 구성하고 제한하는지를 탐구합니다.\n\n각 채널은 서로 다른 '경계'의 순간들을 포착하며, 관람객이 작품 안을 걸으면서 세 영상이 만들어내는 중첩된 서사를 경험하게 됩니다. 상영 시간 45분.",
-    tags: ["비디오아트", "미디어설치", "정체성"],
-    featured: false,
-    image: "/images/exhibitions/threshold-thumb.jpg",
-    heroImage: "/images/exhibitions/threshold-hero.jpg",
-  },
-  {
-    id: "spring-dialogue",
-    title: "Spring Dialogue",
-    titleKo: "봄의 대화",
-    artist: "단체전 Group Exhibition",
-    category: "단체전 / Group Show",
-    date: "2026.05",
-    period: "2026.05.01 — 2026.06.30",
-    location: "Main Hall, 서울",
-    description: "8인 작가의 봄을 둘러싼 다층적 대화",
-    longDescription:
-      "Art Arca의 봄 시즌 대표 단체전으로, 서로 다른 매체와 세대의 8인 작가가 '봄'이라는 테마를 각자의 시각으로 해석합니다. 공통의 주제 아래 이토록 다양한 목소리들이 어우러질 수 있다는 것, 그 자체가 이 전시의 핵심 메시지입니다.\n\n참여 작가: 이지수, 박민준, 최연지, 김도현, 오세진, 황예린, 강태호, 서미래",
-    tags: ["단체전", "현대미술", "봄"],
+    period: "2026.04.01 — 2026.05.15",
+    location: "Art Hub Center, 서울",
+    description: "은하수 위에서 펼쳐지는 아프로 비트와 네온 디스코의 향연",
+    longDescription: "70년대 디스코 문화의 화려한 미학과 아프리카 전통 문양, 그리고 광활한 우주적 상상력이 결합된 전시입니다. 황금빛 아프로 헤어와 크롬 재질의 의상을 입은 인물들이 초현실적인 성운 속에서 춤추는 비주얼은 인류의 기원과 미래적 해방을 동시에 노래합니다.",
+    tags: ["아프로퓨처리즘", "디스코", "초현실주의"],
     featured: true,
-    image: "/images/exhibitions/spring-dialogue-thumb.jpg",
-    heroImage: "/images/exhibitions/spring-dialogue-hero.jpg",
+    image: "/images/exhibitions/afrofuturism-disco-thumb.jpg",
+    heroImage: "/images/exhibitions/afrofuturism-disco-hero.jpg",
+    iconicObject: {
+      name: "Chrome Afrofuturist Mask",
+      description: "A liquid metal mask reflecting cosmic nebulae.",
+      image: "/images/objects/chrome-mask.webp"
+    }
   },
   {
-    id: "echo-chamber",
-    title: "Echo Chamber",
-    titleKo: "에코 챔버",
-    artist: "오세진 Se-Jin Oh",
-    category: "사운드아트 / Sound Art",
-    date: "2026.05",
-    period: "2026.05.15 — 2026.07.15",
-    location: "Sound Room, 서울",
-    description: "청각적 공간이 만들어내는 새로운 존재의 영역",
-    longDescription:
-      "오세진은 건축, 사운드, 퍼포먼스의 경계를 넘나드는 작가입니다. 이번 설치작 'Echo Chamber'는 관람객의 목소리와 발걸음이 실시간으로 변형되어 공간을 채우는 인터랙티브 사운드 환경입니다.\n\n전시 공간 자체가 하나의 악기가 되어, 모든 방문자들이 집단적으로 음악을 만들어갑니다. 혼자 방문해도, 여럿이 방문해도 매번 다른 경험을 선사합니다.",
-    tags: ["사운드아트", "인터랙티브", "설치미술"],
-    featured: false,
-    image: "/images/exhibitions/echo-chamber-thumb.jpg",
-    heroImage: "/images/exhibitions/echo-chamber-hero.jpg",
-  },
-
-  /* ─── 예정 전시 — 음악 & 시대별 아이코닉 장르 ─── */
-  {
-    id: "jazz-visions",
-    title: "Jazz Visions",
-    titleKo: "재즈의 시각",
-    artist: "Thomas Mills & 박지훈 Ji-Hoon Park",
-    category: "음악 / Music Art",
+    id: "ukiyo-e-grunge",
+    title: "Floating Punk",
+    titleKo: "플로팅 펑크: 우키요에와 그란지의 파열음",
+    artist: "타카시 켄 Takashi Ken",
+    category: "혼합매체 / Mixed Media",
     date: "2026.04",
-    period: "2026.04.20 — 2026.06.20",
-    location: "Gallery F, 서울",
-    description: "재즈 황금시대의 리듬이 회화로 피어오르다",
-    longDescription:
-      "1920년대 뉴올리언스에서 시작된 재즈는 단순한 음악을 넘어 20세기 예술 전반의 패러다임을 바꿨습니다. Thomas Mills와 박지훈 두 작가는 각각 미국과 한국의 시각으로 재즈가 품은 즉흥성, 자유, 도시적 에너지를 캔버스에 옮겼습니다.\n\n색채와 붓터치가 리듬과 임프로비제이션을 직접 모방하는 독특한 연작 40점을 선보입니다. 트럼펫 소리가 물감처럼 흐르고, 피아노 선율이 선으로 그려지는 이 전시는 눈으로 듣는 재즈의 경험입니다.",
-    tags: ["재즈", "음악미술", "20세기미국", "즉흥성"],
+    period: "2026.04.10 — 2026.05.30",
+    location: "Neo Edo Gallery, 서울",
+    description: "에도 시대의 섬세한 선 위로 쏟아지는 거친 노이즈",
+    longDescription: "에도 시대의 목판화 '우키요에'의 정적인 아름다움이 90년대 시애틀 그란지 락의 거칠고 반항적인 에너지와 충돌합니다. 화려한 기모노를 입은 인물들이 기타 피드백 노이즈와 그래피티 스타일의 텍스처 속에서 해체되는 과정을 통해 전통의 파괴와 재탄생을 보여줍니다.",
+    tags: ["우키요에", "그란지", "펑크락"],
     featured: true,
-    image: "/images/exhibitions/jazz-visions-thumb.jpg",
-    heroImage: "/images/exhibitions/jazz-visions-hero.jpg",
+    image: "/images/exhibitions/ukiyo-e-grunge-thumb.jpg",
+    heroImage: "/images/exhibitions/ukiyo-e-grunge-hero.jpg",
+    iconicObject: {
+      name: "Shattered Porcelain Electric Guitar",
+      description: "A traditional ceramic-textured guitar with visible glitch artifacts.",
+      image: "/images/objects/porcelain-guitar.webp"
+    }
   },
   {
-    id: "renaissance-echoes",
-    title: "Renaissance Echoes",
-    titleKo: "르네상스의 메아리",
-    artist: "갤러리 특별전 Special Collection",
-    category: "회화 / Classical Painting",
-    date: "2026.04",
-    period: "2026.04.15 — 2026.06.15",
-    location: "Gallery E, 서울",
-    description: "인류 예술의 정점, 르네상스 거장들과의 대화",
-    longDescription:
-      "15~16세기 이탈리아를 중심으로 꽃핀 르네상스는 인간과 자연에 대한 경이로운 탐구를 통해 미술사에 영원한 획을 그었습니다. 레오나르도 다빈치, 미켈란젤로, 라파엘로가 구현한 원근법과 인체 묘사의 정수를 고해상도 재현 작품과 현대 해석으로 살펴봅니다.\n\n이번 특별전은 원작 연구 자료, 스케치 복원, 현대 작가들의 르네상스 재해석 작품을 함께 선보이며, 600년을 넘어 오늘에 울려 퍼지는 예술적 메아리를 탐구합니다.",
-    tags: ["르네상스", "고전회화", "이탈리아미술", "유럽미술"],
-    featured: false,
-    image: "/images/exhibitions/renaissance-echoes-thumb.jpg",
-    heroImage: "/images/exhibitions/renaissance-echoes-hero.jpg",
-  },
-  {
-    id: "minhwa-now",
-    title: "Minhwa Now",
-    titleKo: "민화, 지금",
-    artist: "김채원 Chae-Won Kim",
-    category: "회화 / Folk Painting",
+    id: "nature-bio-art",
+    title: "Organic Matrix",
+    titleKo: "오가닉 매트릭스: 자연과 바이오 아트의 공진",
+    artist: "엘레나 숲 Elena Soop",
+    category: "바이오 인스톨레이션 / Bio Art",
     date: "2026.05",
-    period: "2026.05.01 — 2026.07.01",
-    location: "Gallery G, 서울",
-    description: "조선의 빛깔이 현재와 만나는 순간",
-    longDescription:
-      "민화는 조선 시대 서민들의 삶 속에서 자유롭게 피어난 생명력 넘치는 그림입니다. 호랑이, 모란, 책가도, 십장생 — 각각의 도상이 담은 염원과 철학은 수백 년을 지나 오늘날에도 여전히 유효합니다.\n\n김채원 작가는 전통 안료와 한지를 고집하면서도 현대적 구도와 주제를 접목, 민화의 문법으로 21세기를 이야기합니다. 총 45점의 신작은 전통과 현대, 과거와 현재의 경계가 아름답게 허물어지는 현장을 만들어냅니다.",
-    tags: ["민화", "한국전통미술", "현대적해석", "조선회화"],
-    featured: false,
-    image: "/images/exhibitions/minhwa-now-thumb.jpg",
-    heroImage: "/images/exhibitions/minhwa-now-hero.jpg",
+    period: "2026.05.01 — 2026.06.20",
+    location: "Green Cube, 서울",
+    description: "살아있는 세포가 그리는 미시 세계의 교향곡",
+    longDescription: "식물의 광합성 데이터와 미생물의 군집 성장을 시각화한 바이오 아트 전시입니다. 실험실의 페트리 접시 속 생태계가 거대한 프로젝션 맵핑을 통해 갤러리 전체로 확장되며, 관람객은 인간과 비인간 생명체가 상호작용하는 유기적 매트릭스의 일부가 됩니다.",
+    tags: ["바이오아트", "생태미술", "뉴미디어"],
+    featured: true,
+    image: "/images/exhibitions/nature-bio-art-thumb.jpg",
+    heroImage: "/images/exhibitions/nature-bio-art-hero.jpg",
+    iconicObject: {
+      name: "Bioluminescent Glass Cello",
+      description: "A translucent cello filled with pulsing neon microorganisms.",
+      image: "/images/objects/bio-cello.webp"
+    }
   },
   {
-    id: "impressionist-moments",
-    title: "Impressionist Moments",
-    titleKo: "인상의 순간들",
-    artist: "이서현 Seo-Hyun Lee",
-    category: "회화 / Impressionism",
+    id: "architecture-hiphop",
+    title: "Concrete Flow",
+    titleKo: "콘크리트 플로우: 건축적 구조와 힙합의 비트",
+    artist: "마커스 브릭 Marcus Brick",
+    category: "조각 및 설치 / Sculpture",
     date: "2026.05",
-    period: "2026.05.10 — 2026.07.10",
-    location: "Gallery H, 서울",
-    description: "빛과 색채로 포착한 찰나의 감동",
-    longDescription:
-      "19세기 후반 파리, 모네와 르누아르가 관습을 깨고 자연의 빛을 캔버스에 담았을 때 미술의 역사가 바뀌었습니다. 이서현 작가는 인상주의의 정수 — 순간의 빛, 흐릿한 경계, 감각적 색채 — 를 한국의 사계절 풍경에 녹여냅니다.\n\n서울 북한산의 안개, 제주 바다의 반짝임, 전라도 들판의 햇살이 두꺼운 물감층 위에서 살아 숨쉽니다. 총 35점의 대형 유화를 통해 관람객은 순간 속에 영원을 담는 인상주의적 시선을 경험하게 됩니다.",
-    tags: ["인상주의", "빛과색채", "야외회화", "한국풍경"],
-    featured: false,
-    image: "/images/exhibitions/impressionist-moments-thumb.jpg",
-    heroImage: "/images/exhibitions/impressionist-moments-hero.jpg",
+    period: "2026.05.15 — 2026.07.10",
+    location: "Urban Void, 서울",
+    description: "브루탈리즘 건축의 육중함에 실린 붐뱁의 리듬",
+    longDescription: "콘크리트와 철강으로 이루어진 브루탈리즘 건축의 차갑고 육중한 미학을 힙합 음악의 리드미컬한 샘플링 기법으로 재해석했습니다. 거친 질감의 기하학적 구조물들이 마치 샘플러 위에서 쪼개진 비트처럼 공간을 장악하며 도시의 고동 소리를 형상화합니다.",
+    tags: ["브루탈리즘", "힙합", "도시건축"],
+    featured: true,
+    image: "/images/exhibitions/architecture-hiphop-thumb.jpg",
+    heroImage: "/images/exhibitions/architecture-hiphop-hero.jpg",
+    iconicObject: {
+      name: "Brutalist Concrete Boombox",
+      description: "A heavy, raw concrete boombox with brass accents.",
+      image: "/images/objects/concrete-boombox.webp"
+    }
   },
   {
-    id: "baroque-shadows",
-    title: "Baroque Shadows",
-    titleKo: "바로크의 그림자",
-    artist: "갤러리 큐레이션 Gallery Curated",
-    category: "회화 / Baroque Art",
+    id: "cyberpunk-hanbok",
+    title: "Neon Thread",
+    titleKo: "네온 스레드: 사이버펑크와 한복의 만남",
+    artist: "한지혜 Ji-Hye Han",
+    category: "패션 아트 / Fashion Art",
     date: "2026.06",
-    period: "2026.06.01 — 2026.07.31",
-    location: "Main Hall, 서울",
-    description: "빛과 어둠의 극적 대비가 빚어낸 인간의 초상",
-    longDescription:
-      "17세기 바로크 미술은 카라바조의 혁명적인 키아로스쿠로(명암법)로 시작해 렘브란트의 내면 탐구, 루벤스의 역동적 육체성으로 전개됩니다. 빛과 어둠의 극적 대비는 단순한 기법을 넘어 인간 존재의 드라마를 표현하는 철학이 되었습니다.\n\n이번 전시는 바로크 원작 연구 자료와 현대 작가들이 재해석한 신작을 함께 구성합니다. 깊은 어둠 속에서 빛나는 얼굴들, 그 안에 담긴 감정의 진폭을 직접 마주하는 경험을 제공합니다.",
-    tags: ["바로크", "명암법", "고전미술", "유럽회화"],
-    featured: false,
-    image: "/images/exhibitions/baroque-shadows-thumb.jpg",
-    heroImage: "/images/exhibitions/baroque-shadows-hero.jpg",
+    period: "2026.06.01 — 2026.07.15",
+    location: "Digital Pavilion, 서울",
+    description: "전통 한복의 곡선과 광섬유가 빚어내는 미래적 아우라",
+    longDescription: "한복의 우아한 실루엣에 광섬유와 LED, 테크니컬 웨어의 소재를 결합하여 21세기형 '테크-한복'을 제시합니다. 비 오는 밤의 네온 거리를 배경으로, 전통과 최첨단 기술이 실타래처럼 얽혀 새로운 한국적 사이버펑크 비주얼을 완성합니다.",
+    tags: ["사이버펑크", "한복", "테크웨어"],
+    featured: true,
+    image: "/images/exhibitions/cyberpunk-hanbok-thumb.jpg",
+    heroImage: "/images/exhibitions/cyberpunk-hanbok-hero.jpg",
+    iconicObject: {
+      name: "Fiber-Optic Jade Norigae",
+      description: "A traditional jade pendant glowing with inner data streams.",
+      image: "/images/objects/neon-norigae.webp"
+    }
   },
   {
-    id: "electronic-fields",
-    title: "Electronic Fields",
-    titleKo: "전자적 풍경",
-    artist: "Haruki Nakamura & 정수빈 Su-Bin Jung",
-    category: "음악 / Electronic Music Art",
+    id: "surreal-ambient",
+    title: "Dream Frequency",
+    titleKo: "드림 프리퀀시: 초현실주의와 앰비언트의 심해",
+    artist: "소피아 문 Sophia Moon",
+    category: "몰입형 미디어 / Immersive Media",
     date: "2026.06",
-    period: "2026.06.15 — 2026.08.15",
-    location: "Sound Room, 서울",
-    description: "전자음악과 디지털 비주얼이 만들어내는 새로운 감각 지평",
-    longDescription:
-      "1970년대 크라프트베르크에서 시작된 전자음악은 아날로그와 디지털의 경계를 지우며 인간의 감각을 확장해 왔습니다. Haruki Nakamura(일본)와 정수빈(한국)은 각자의 전자음악 어휘로 서로의 비주얼 언어에 응답하는 공동 작업을 선보입니다.\n\n실시간 신시사이저 연주에 반응하는 생성 비주얼, 관람객의 움직임을 사운드로 변환하는 인터랙티브 설치, 그리고 두 작가의 콜라보레이션 영상 작품이 한데 어우러지는 이 전시는 전자음악의 현재를 집약합니다.",
-    tags: ["전자음악", "디지털아트", "사운드비주얼", "인터랙티브"],
-    featured: false,
-    image: "/images/exhibitions/electronic-fields-thumb.jpg",
-    heroImage: "/images/exhibitions/electronic-fields-hero.jpg",
+    period: "2026.06.10 — 2026.08.05",
+    location: "Deep Space Gallery, 서울",
+    description: "시간이 멈춘 바닷속에서 들려오는 몽환적인 소리의 풍경",
+    longDescription: "살바도르 달리의 초현실적 상상력과 브라이언 이노의 앰비언트 음악이 결합된 몰입형 전시입니다. 관람객은 구름이 떠다니는 깊은 바닷속을 유영하며, 감각의 전이를 통해 꿈과 현실이 모호해지는 무의식의 주파수를 체험하게 됩니다.",
+    tags: ["초현실주의", "앰비언트", "사운드스케이프"],
+    featured: true,
+    image: "/images/exhibitions/surreal-ambient-thumb.jpg",
+    heroImage: "/images/exhibitions/surreal-ambient-hero.jpg",
+    iconicObject: {
+      name: "Floating Melting Vinyl",
+      description: "A distorted vinyl record warping like a liquid clock.",
+      image: "/images/objects/melting-vinyl.webp"
+    }
   },
   {
-    id: "abstract-expressions",
-    title: "Abstract Expressions",
-    titleKo: "추상의 표현",
-    artist: "양정훈 Jung-Hoon Yang",
-    category: "회화 / Abstract Art",
-    date: "2026.06",
-    period: "2026.06.01 — 2026.07.31",
-    location: "Gallery I, 서울",
-    description: "의식의 흐름을 캔버스 위에 쏟아붓다",
-    longDescription:
-      "1950년대 뉴욕을 뒤흔든 추상표현주의 — 폴록의 드리핑, 클라인의 거대한 검정 획, 로스코의 색면들 — 은 이성보다 감정, 계획보다 즉흥을 믿었습니다. 양정훈 작가는 이 사조의 정신적 후계자로서, 한국적 정서와 몸의 언어를 더한 자신만의 추상 회화 세계를 구축해 왔습니다.\n\n대형 캔버스에 거침없이 쏟아지는 붓질들이 만들어내는 이 작품들은, 보는 순간마다 다른 감정을 촉발합니다. 25점의 신작으로 구성된 이번 개인전은 작가의 10년 탐구의 정점을 보여줍니다.",
-    tags: ["추상표현주의", "뉴욕파", "액션페인팅", "한국현대미술"],
-    featured: false,
-    image: "/images/exhibitions/abstract-expressions-thumb.jpg",
-    heroImage: "/images/exhibitions/abstract-expressions-hero.jpg",
-  },
-  {
-    id: "korean-classical-music",
-    title: "Gugak Horizons",
-    titleKo: "국악의 지평",
-    artist: "전통음악연구소 Traditional Music Institute",
-    category: "음악 / Korean Music",
+    id: "vaporwave-renaissance",
+    title: "Statue Wave",
+    titleKo: "스테츄 웨이브: 베이퍼웨이브와 르네상스 조각",
+    artist: "베이퍼 97 Vapor 97",
+    category: "디지털 렌더링 / 3D Art",
     date: "2026.07",
-    period: "2026.07.01 — 2026.08.31",
-    location: "Main Hall, 서울",
-    description: "천 년의 소리가 오늘과 만나는 교차점",
-    longDescription:
-      "가야금의 가녀린 떨림, 해금의 구슬픈 선율, 장구의 힘찬 리듬 — 한국 전통 음악은 수천 년의 역사를 담고 오늘날까지 숨쉬고 있습니다. 이번 전시는 국악기의 아름다움을 시각 예술로 해석한 사진, 조각, 회화 작품들과 함께 전통 음악의 역사 아카이브를 선보입니다.\n\n조선 왕조의 궁중음악부터 현대 퓨전 국악까지 망라하는 이 전시는 소리를 눈으로, 시각을 귀로 경험하는 공감각적 여정입니다. 주말마다 진행되는 국악 라이브 퍼포먼스도 함께 기획되어 있습니다.",
-    tags: ["국악", "한국전통음악", "가야금", "현대적해석"],
+    period: "2026.07.01 — 2026.08.20",
+    location: "Glitch Gallery, 서울",
+    description: "파스텔톤 노을 아래 핑크색 액체로 변하는 다비드상",
+    longDescription: "르네상스의 상징적인 조각상들이 베이퍼웨이브 특유의 파스텔톤 색조와 90년대 초기 인터넷 그래픽 속으로 소환됩니다. 고전적 완벽함이 로우파이(Lo-fi)한 노이즈와 디지털 오류 속에서 녹아내리는 모습은 풍요로웠던 과거에 대한 향수와 디지털적 허무를 동시에 드러냅니다.",
+    tags: ["베이퍼웨이브", "르네상스", "인터넷미학"],
     featured: true,
-    image: "/images/exhibitions/korean-classical-music-thumb.jpg",
-    heroImage: "/images/exhibitions/korean-classical-music-hero.jpg",
+    image: "/images/exhibitions/vaporwave-renaissance-thumb.jpg",
+    heroImage: "/images/exhibitions/vaporwave-renaissance-hero.jpg",
+    iconicObject: {
+      name: "Abstract Marble David Head",
+      description: "A marble bust with neon wireframe glitches and golden cracks.",
+      image: "/images/objects/marble-david.webp"
+    }
   },
+  {
+    id: "techno-minimalism",
+    title: "Binary Pulse",
+    titleKo: "바이너리 펄스: 테크노와 미니멀리즘의 격자",
+    artist: "칼 드레이퍼 Karl Draper",
+    category: "라이트 아트 / Light Art",
+    date: "2026.07",
+    period: "2026.07.15 — 2026.09.10",
+    location: "The Grid, 서울",
+    description: "완벽한 어둠 속에서 고동치는 차가운 레이저 비트",
+    longDescription: "도널드 저드의 미니멀리즘 조각과 베를린 테크노의 정교한 리듬이 만났습니다. 0과 1, 켜짐과 꺼짐의 이진법적 논리를 따르는 정밀한 레이저 선들이 거대한 공간을 가로지르며, 관람객은 소리와 빛이 하나로 수렴되는 순수 추상의 정점을 경험합니다.",
+    tags: ["미니멀리즘", "테크노", "라이트아트"],
+    featured: true,
+    image: "/images/exhibitions/techno-minimalism-thumb.jpg",
+    heroImage: "/images/exhibitions/techno-minimalism-hero.jpg",
+    iconicObject: {
+      name: "Monolithic Slate Turntable",
+      description: "A razor-sharp obsidian record player with a laser stylus.",
+      image: "/images/objects/slate-turntable.webp"
+    }
+  },
+  {
+    id: "opera-streetart",
+    title: "Grand Vandalism",
+    titleKo: "그랜드 반달리즘: 오페라와 거리 미술의 소음",
+    artist: "뱅크시 시스터즈 Banksy Sisters",
+    category: "그래피티 및 설치 / Graffiti",
+    date: "2026.08",
+    period: "2026.08.01 — 2026.09.25",
+    location: "Opera House Yard, 서울",
+    description: "금박 장식된 오페라 무대 위에 뿌려지는 스프레이의 전율",
+    longDescription: "고결하고 우아한 오페라의 아리아가 거친 스트리트 아트와 결합합니다. 벨벳 커튼과 샹들리에가 있는 고전적 무대 위에 화려한 그래피티가 덧칠해지며, 고급 예술의 권위에 도전하는 거리의 에너지를 폭발적으로 보여주는 전시입니다.",
+    tags: ["오페라", "거리미술", "그래피티"],
+    featured: true,
+    image: "/images/exhibitions/opera-streetart-thumb.jpg",
+    heroImage: "/images/exhibitions/opera-streetart-hero.jpg",
+    iconicObject: {
+      name: "Gilded Spray-Painted Harp",
+      description: "A classical harp dripping with vibrant, neon street-art spray paint.",
+      image: "/images/objects/neon-harp.webp"
+    }
+  },
+  {
+    id: "folk-indie-popart",
+    title: "Wildflower Pop",
+    titleKo: "와일드플라워 팝: 민속 신앙과 인디 팝의 변주",
+    artist: "장미 Rose Jang",
+    category: "회화 / Painting",
+    date: "2026.08",
+    period: "2026.08.15 — 2026.10.15",
+    location: "Flower Garden, 서울",
+    description: "토속적인 무속 신앙의 색채와 인디 팝의 발랄한 감수성",
+    longDescription: "한국 전통 민화와 무속 신앙에서 쓰이는 강렬한 원색들을 현대적인 인디 팝 감성의 일러스트레이션으로 풀어냈습니다. 굿판의 역동적인 춤사위가 팝아트적인 평면성과 만나, 낯설지만 친숙한 현대판 '코리안 샤머니즘 팝'을 선보입니다.",
+    tags: ["민화", "인디팝", "팝아트"],
+    featured: true,
+    image: "/images/exhibitions/folk-indie-popart-thumb.jpg",
+    heroImage: "/images/exhibitions/folk-indie-popart-hero.jpg",
+    iconicObject: {
+      name: "Holographic Mudang Fan",
+      description: "A traditional shamanic fan shimmering with iridescent pop-art colors.",
+      image: "/images/objects/holographic-fan.webp"
+    }
+  }
 ];
-
-export function getExhibition(id: string): Exhibition | undefined {
-  return exhibitions.find((ex) => ex.id === id);
-}
 
 export function getFeaturedExhibitions(): Exhibition[] {
   return exhibitions.filter((ex) => ex.featured);
+}
+
+export function getExhibition(id: string): Exhibition | undefined {
+  return exhibitions.find((ex) => ex.id === id);
 }

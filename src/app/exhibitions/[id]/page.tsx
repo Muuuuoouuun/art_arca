@@ -4,8 +4,16 @@ import Image from "next/image";
 import { exhibitions, getExhibition } from "../../../lib/data";
 import { getExhibitionStatus, STATUS_LABEL, STATUS_STYLE } from "../../../lib/utils";
 import AnimatedContainer from "../../../components/AnimatedContainer";
+import ParallaxImage from "../../../components/ParallaxImage";
+import { FloatingIconicObject, GlyphArtifact } from "../../../components/FloatingIconicObject";
+import FilmGrain from "../../../components/FilmGrain";
+import BackgroundGlow from "../../../components/BackgroundGlow";
 import BookmarkButton from "../../../components/BookmarkButton";
-import ExhibitionActions, { ReservationTrigger } from "../../../components/ExhibitionActions";
+import ShareButtons from "../../../components/ShareButtons";
+import ReservationModal from "../../../components/ReservationModal";
+import ReviewForm from "../../../components/ReviewForm";
+import ReviewsList from "../../../components/ReviewsList";
+import GlassCard from "../../../components/GlassCard";
 
 export async function generateStaticParams() {
   return exhibitions.map((ex) => ({ id: ex.id }));
@@ -16,25 +24,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const ex = getExhibition(id);
   if (!ex) return { title: "Not Found" };
 
-  const ogImage = ex.heroImage
-    ? `https://art-arca.vercel.app${ex.heroImage}`
-    : undefined;
-
   return {
-    title: `${ex.title} — Art Arca`,
+    title: `${ex.title} — Art Hub 4.2 Synergy`,
     description: ex.description,
-    openGraph: {
-      title: `${ex.title} (${ex.titleKo})`,
-      description: ex.description,
-      type: "article",
-      ...(ogImage && { images: [{ url: ogImage, width: 1600, height: 700, alt: ex.title }] }),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${ex.title} — Art Arca`,
-      description: ex.description,
-      ...(ogImage && { images: [ogImage] }),
-    },
   };
 }
 
@@ -43,135 +35,199 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
   const ex = getExhibition(id);
   if (!ex) notFound();
 
-  const related = exhibitions.filter((e) => e.id !== ex.id).slice(0, 2);
+  const related = exhibitions.filter((e) => e.id !== ex.id).slice(0, 3);
   const status = getExhibitionStatus(ex.period);
 
   return (
-    <AnimatedContainer>
-      <div className="bg-[#F2F0ED] min-h-screen text-[#1a1a1a]">
-        {/* Back Navigation */}
-        <div className="px-8 md:px-24 pt-28 pb-0">
-          <Link
-            href="/exhibitions"
-            className="text-[9px] uppercase tracking-[0.3em] text-stone-400 hover:text-stone-900 transition-colors"
-          >
-            ← Exhibitions
-          </Link>
-        </div>
+    <div className="bg-[#050505] min-h-screen text-white selection:bg-white selection:text-black relative overflow-hidden">
+      <FilmGrain />
+      <BackgroundGlow color="bg-zinc-800" size="w-[1000px] h-[1000px]" className="top-[-500px] right-[-200px]" opacity={0.1} />
+      
+      {/* Dynamic Header */}
+      <nav className="fixed top-0 left-0 w-full z-50 px-8 py-8 flex justify-between items-center mix-blend-difference">
+        <Link href="/" className="text-lg font-serif tracking-[0.5em] hover:italic transition-all">ART HUB 4.2</Link>
+        <Link href="/exhibitions" className="text-[10px] uppercase tracking-[0.3em] border-b border-white/20 pb-1 hover:border-white transition-all">Back to Index</Link>
+      </nav>
 
-        {/* Hero */}
-        <header className="px-8 md:px-24 pt-10 pb-16">
-          <div className="flex justify-between items-start mb-8">
-            <div className="flex items-center gap-3">
-              <span className="text-[9px] uppercase tracking-[0.3em] text-stone-400 font-bold">{ex.category}</span>
-              <span className={`text-[8px] uppercase tracking-[0.2em] px-2.5 py-1 ${STATUS_STYLE[status]}`}>
+      {/* Editorial Hero */}
+      <section className="relative h-[100vh] flex flex-col justify-end px-8 md:px-20 pb-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <ParallaxImage src={ex.heroImage!} alt={ex.title} className="opacity-40 grayscale hover:grayscale-0 transition-all duration-1000" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+        </div>
+        
+        {/* Floating Iconic Object in Detail Hero */}
+        {ex.iconicObject && (
+          <FloatingIconicObject 
+            src={ex.iconicObject.image} 
+            alt={ex.iconicObject.name} 
+            side="right"
+            className="top-[10%] opacity-90 scale-125"
+          />
+        )}
+
+        {/* Visual-First Editorial Glyphs */}
+        <div className="absolute left-10 top-[30%] hidden xl:flex flex-col gap-12 z-20">
+          <GlyphArtifact label="Archive ID" value={ex.id.slice(0,8).toUpperCase()} />
+          <GlyphArtifact label="Object Class" value="Iconic Masterpiece" />
+          <GlyphArtifact label="Ref. System" value="Synergy Layout v4.2" />
+        </div>
+        
+        <div className="relative z-10 max-w-[1400px]">
+          <AnimatedContainer delay={0.2}>
+            <div className="flex items-center gap-6 mb-8">
+              <span className="text-zinc-500 text-xs tracking-[0.6em] uppercase block font-mono">Archive No. {ex.id.slice(0,4).toUpperCase()}</span>
+              <span className={`text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-full border ${STATUS_STYLE[status]}`}>
                 {STATUS_LABEL[status]}
               </span>
             </div>
-            <span className="text-[9px] font-mono text-stone-400">{ex.date}</span>
-          </div>
-          <h1 className="text-5xl md:text-8xl font-serif tracking-tight leading-[0.9] mb-6">{ex.title}</h1>
-          <p className="text-lg md:text-2xl font-serif italic text-stone-500">{ex.titleKo}</p>
-        </header>
-
-        {/* Hero Image */}
-        <div className="px-8 md:px-24 mb-16">
-          <div className="w-full aspect-[16/7] relative overflow-hidden">
-            {ex.heroImage ? (
-              <Image
-                src={ex.heroImage} alt={`${ex.title} — ${ex.titleKo}`}
-                fill className="object-cover" sizes="100vw" priority
-              />
-            ) : (
-              <div className="w-full h-full" style={{ backgroundColor: "hsl(30, 8%, 82%)" }} />
-            )}
-            {/* 카드 북마크 버튼 (히어로 이미지 위) */}
-            <div className="absolute top-5 right-5 z-10">
-              <BookmarkButton exhibitionId={ex.id} variant="card" />
+            <h1 className="text-[10vw] md:text-[8vw] font-serif font-bold leading-[0.8] tracking-tighter mb-10">
+              {ex.title.split(' ').map((word, i) => (
+                <span key={i} className={i % 2 === 1 ? 'italic text-zinc-500 block' : 'block'}>{word}</span>
+              ))}
+            </h1>
+            <div className="flex flex-col md:flex-row md:items-center gap-12 border-t border-zinc-900 pt-12">
+               <div className="flex flex-col">
+                 <span className="text-[10px] text-zinc-600 uppercase tracking-widest mb-2 font-mono">Category</span>
+                 <span className="text-lg font-serif">{ex.category}</span>
+               </div>
+               <div className="flex flex-col">
+                 <span className="text-[10px] text-zinc-600 uppercase tracking-widest mb-2 font-mono">Artist</span>
+                 <span className="text-lg font-serif">{ex.artist}</span>
+               </div>
+               <div className="flex flex-col">
+                 <span className="text-[10px] text-zinc-600 uppercase tracking-widest mb-2 font-mono">Date</span>
+                 <span className="text-lg font-serif">{ex.date}</span>
+               </div>
+               <div className="flex items-center gap-4 ml-auto">
+                 <BookmarkButton exhibitionId={ex.id} variant="detail" />
+                 <ShareButtons title={ex.title} />
+               </div>
             </div>
-          </div>
+          </AnimatedContainer>
         </div>
+      </section>
 
-        {/* Content Grid */}
-        <div className="px-8 md:px-24 pb-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-            {/* Main */}
-            <div className="md:col-span-2">
-              <p className="text-2xl font-light leading-relaxed mb-10 text-stone-700">{ex.description}</p>
-              <div className="space-y-4">
-                {ex.longDescription.split("\n\n").map((para, i) => (
-                  <p key={i} className="text-base leading-loose text-stone-600">{para}</p>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2 mt-12">
-                {ex.tags.map((tag) => (
-                  <span key={tag} className="text-[8px] uppercase tracking-[0.2em] border border-stone-300 text-stone-500 px-3 py-1.5">
-                    {tag}
-                  </span>
-                ))}
-              </div>
+      {/* Editorial Spread Layout */}
+      <section className="px-8 md:px-20 py-40 max-w-[1800px] mx-auto relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 relative z-10">
+          {/* Double Column Spread */}
+          <div className="lg:col-span-8">
+            <AnimatedContainer>
+               <h2 className="text-5xl md:text-7xl font-serif italic mb-24 text-zinc-300 leading-tight max-w-4xl">
+                 "{ex.description}"
+               </h2>
+               
+               <div className="lg:columns-2 gap-16 space-y-12 lg:space-y-0">
+                  {ex.longDescription.split('\n\n').map((p, i) => (
+                    <p key={i} className="text-xl md:text-2xl font-light text-zinc-400 leading-relaxed first-letter:text-8xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-white first-letter:leading-[0.8] mb-12 break-inside-avoid">
+                      {p}
+                    </p>
+                  ))}
+               </div>
 
-              {/* 클라이언트 인터랙션 (북마크, 공유, 후기) */}
-              <ExhibitionActions
-                exhibitionId={ex.id}
-                exhibitionTitle={ex.title}
-                exhibitionTitleKo={ex.titleKo}
-                exhibitionPeriod={ex.period}
-              />
-            </div>
+               <div className="mt-32 space-y-20 border-t border-white/5 pt-20">
+                  <div className="flex flex-col gap-8">
+                    <h3 className="text-3xl font-serif tracking-tight">Community Resonance</h3>
+                    <ReviewForm exhibitionId={ex.id} />
+                  </div>
+                  <ReviewsList exhibitionId={ex.id} />
+               </div>
+            </AnimatedContainer>
+          </div>
 
-            {/* Sidebar */}
-            <div className="space-y-8">
-              <div className="border-t border-stone-200 pt-8">
-                <p className="text-[8px] uppercase tracking-[0.3em] text-stone-400 mb-2 font-bold">Artist</p>
-                <p className="text-sm text-stone-800">{ex.artist}</p>
-              </div>
-              <div className="border-t border-stone-200 pt-8">
-                <p className="text-[8px] uppercase tracking-[0.3em] text-stone-400 mb-2 font-bold">Period</p>
-                <p className="text-sm text-stone-800 leading-relaxed">{ex.period}</p>
-              </div>
-              <div className="border-t border-stone-200 pt-8">
-                <p className="text-[8px] uppercase tracking-[0.3em] text-stone-400 mb-2 font-bold">Location</p>
-                <p className="text-sm text-stone-800">{ex.location}</p>
-              </div>
-              <div className="border-t border-stone-200 pt-8">
-                <ReservationTrigger
-                  exhibitionTitle={ex.title}
-                  exhibitionPeriod={ex.period}
+          {/* Metadata Grid & Stats */}
+          <div className="lg:col-span-4 space-y-16">
+             <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Coord. X</p>
+                   <p className="text-2xl font-serif tabular-nums">37.56°N</p>
+                </div>
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Coord. Y</p>
+                   <p className="text-2xl font-serif tabular-nums">126.9°E</p>
+                </div>
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Serial No.</p>
+                   <p className="text-2xl font-serif tabular-nums">#{ex.id.slice(0,6)}</p>
+                </div>
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
+                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Spec Index</p>
+                   <p className="text-2xl font-serif tabular-nums">A+ / 1.2</p>
+                </div>
+             </div>
+
+             <AnimatedContainer delay={0.2} className="aspect-[3/4] relative rounded-3xl overflow-hidden border border-white/5 shadow-2xl group">
+                <Image src={ex.image!} alt={ex.title} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                {ex.iconicObject && (
+                  <div className="absolute bottom-8 left-8 right-8">
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-2 font-mono">Iconic Artifact</p>
+                    <p className="text-2xl font-serif text-white">{ex.iconicObject.name}</p>
+                  </div>
+                )}
+             </AnimatedContainer>
+
+             <AnimatedContainer delay={0.3} className="space-y-12">
+                <div className="border-t border-zinc-900 pt-12">
+                   <h4 className="text-[10px] text-zinc-600 uppercase tracking-[0.4em] mb-6 font-mono font-bold">Logistical Data</h4>
+                   <div className="space-y-8">
+                      <div className="flex justify-between items-end border-b border-white/5 pb-4">
+                        <p className="text-zinc-500 text-xs uppercase tracking-widest">Period</p>
+                        <p className="text-lg font-serif">{ex.period}</p>
+                      </div>
+                      <div className="flex justify-between items-end border-b border-white/5 pb-4">
+                        <p className="text-zinc-500 text-xs uppercase tracking-widest">Environment</p>
+                        <p className="text-lg font-serif">{ex.location}</p>
+                      </div>
+                   </div>
+                </div>
+
+                <ReservationModal 
+                  exhibitionTitle={ex.title} 
+                  exhibitionPeriod={ex.period} 
                 />
-              </div>
-            </div>
+             </AnimatedContainer>
           </div>
         </div>
 
-        {/* Related Exhibitions */}
-        <section className="px-8 md:px-24 py-16 border-t border-stone-200">
-          <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 mb-12 font-bold">More Exhibitions</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
-            {related.map((rel) => (
-              <Link key={rel.id} href={`/exhibitions/${rel.id}`} className="group flex gap-6 items-start">
-                <div className="w-24 aspect-[3/4] flex-shrink-0 overflow-hidden relative bg-stone-200">
-                  {rel.image ? (
-                    <Image src={rel.image} alt={rel.title} fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="96px"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-stone-300 group-hover:scale-105 transition-transform duration-500" />
-                  )}
-                </div>
-                <div>
-                  <span className="text-[8px] uppercase tracking-[0.2em] text-stone-400">{rel.category}</span>
-                  <h3 className="text-xl font-serif mt-1 mb-1 group-hover:underline underline-offset-4">{rel.title}</h3>
-                  <p className="text-xs text-stone-500">{rel.artist}</p>
-                </div>
-              </Link>
-            ))}
+        {ex.iconicObject && (
+          <div className="absolute left-[-10vw] bottom-[10%] opacity-20 pointer-events-none select-none mix-blend-screen hidden xl:block scale-150">
+             <Image src={ex.iconicObject.image} alt="Background Artifact" width={800} height={800} />
           </div>
-        </section>
+        )}
+      </section>
 
-        <div className="pb-24" />
-      </div>
-    </AnimatedContainer>
+      {/* Explore Further */}
+      <section className="px-8 md:px-20 py-40 border-t border-zinc-900 relative">
+         <BackgroundGlow color="bg-blue-900" size="w-[800px] h-[800px]" className="bottom-[-400px] left-[-200px]" opacity={0.05} />
+         <AnimatedContainer className="mb-20">
+            <h2 className="text-5xl font-serif uppercase tracking-tighter">THE <span className="italic text-zinc-500">RELATED</span> SELECTION</h2>
+         </AnimatedContainer>
+
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+            {related.map((rel, i) => (
+              <AnimatedContainer key={rel.id} delay={i * 0.1}>
+                <Link href={`/exhibitions/${rel.id}`} className="group block space-y-6">
+                  <div className="aspect-[16/10] relative rounded-2xl overflow-hidden border border-white/5 bg-zinc-900">
+                    <Image src={rel.heroImage!} alt={rel.title} fill className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-mono font-bold">{rel.artist}</span>
+                      <h3 className="text-2xl font-serif mt-2 group-hover:text-shadow-glow transition-all">{rel.title}</h3>
+                    </div>
+                    <span className="font-mono text-xs text-zinc-800 group-hover:text-zinc-500 transition-colors">#{rel.id.slice(0,3)}</span>
+                  </div>
+                </Link>
+              </AnimatedContainer>
+            ))}
+         </div>
+      </section>
+
+      <footer className="py-20 px-8 text-center border-t border-zinc-900 relative z-10">
+         <p className="text-[10px] text-zinc-700 tracking-[0.4em] font-mono uppercase font-bold">Art Hub 4.2 — Synergy Integration Update // Metadata Integrated</p>
+      </footer>
+    </div>
   );
 }

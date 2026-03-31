@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useBookmarks } from "../hooks/useBookmarks";
+import GlassCard from "./GlassCard";
+import { motion } from "framer-motion";
 
 const navLinks = [
-  { href: "/exhibitions", label: "Exhibitions" },
-  { href: "/about", label: "About" },
+  { href: "/exhibitions", label: "Registry" },
+  { href: "/bookmarks", label: "Saved" },
+  { href: "/about", label: "System" },
 ];
 
 export default function Navigation() {
@@ -14,51 +17,44 @@ export default function Navigation() {
   const { bookmarks } = useBookmarks();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F2F0ED]/90 backdrop-blur-sm border-b border-stone-200">
-      <div className="px-8 md:px-24 py-5 flex justify-between items-center">
-        <Link
-          href="/"
-          className="text-[11px] uppercase tracking-[0.4em] font-bold text-stone-900 hover:text-stone-600 transition-colors"
+    <nav className="fixed top-0 left-0 w-full z-[100] px-8 py-6">
+      <GlassCard className="max-w-[1800px] mx-auto px-10 py-4 flex justify-between items-center">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-4"
         >
-          Art Arca
-        </Link>
-
-        <div className="flex items-center gap-10">
+          <Link href="/" className="text-white tracking-[0.5em] font-serif text-lg font-bold">ART HUB 4.2</Link>
+          <span className="hidden sm:block text-zinc-500 font-sans text-[9px] tracking-[0.2em] border-l border-zinc-800 pl-4 py-1 uppercase font-bold">Synergy Update<br/>Edition</span>
+        </motion.div>
+        
+        <div className="hidden md:flex gap-12 items-center text-[10px] uppercase tracking-[0.2em] font-bold">
           {navLinks.map((link) => (
-            <Link
+            <Link 
               key={link.href}
-              href={link.href}
-              className={`text-[10px] uppercase tracking-[0.3em] transition-colors ${
-                pathname.startsWith(link.href)
-                  ? "text-stone-900 font-bold"
-                  : "text-stone-500 hover:text-stone-900"
-              }`}
+              href={link.href} 
+              className={`hover:text-white transition-colors duration-500 relative py-2 ${pathname.startsWith(link.href) ? "text-white" : "text-zinc-500"}`}
             >
-              {link.label}
+              <div className="flex items-center gap-2">
+                {link.label}
+                {link.href === "/bookmarks" && bookmarks.length > 0 && (
+                  <span className="w-4 h-4 bg-white text-black text-[8px] flex items-center justify-center rounded-full shadow-[0_0_10px_white]">
+                    {bookmarks.length}
+                  </span>
+                )}
+              </div>
+              {pathname.startsWith(link.href) && (
+                <motion.div layoutId="nav-underline" className="absolute bottom-0 left-0 w-full h-[2px] bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+              )}
             </Link>
           ))}
-
-          {/* 북마크 링크 */}
-          <Link
-            href="/bookmarks"
-            className={`relative flex items-center gap-1.5 text-[10px] uppercase tracking-[0.3em] transition-colors ${
-              pathname === "/bookmarks"
-                ? "text-stone-900 font-bold"
-                : "text-stone-500 hover:text-stone-900"
-            }`}
-          >
-            <svg width={14} height={14} viewBox="0 0 24 24" fill={pathname === "/bookmarks" ? "currentColor" : "none"} stroke="currentColor" strokeWidth={2}>
-              <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-            </svg>
-            Saved
-            {bookmarks.length > 0 && (
-              <span className="absolute -top-1.5 -right-3 w-4 h-4 bg-stone-900 text-white text-[8px] flex items-center justify-center rounded-full">
-                {bookmarks.length > 9 ? "9+" : bookmarks.length}
-              </span>
-            )}
-          </Link>
         </div>
-      </div>
+
+        <Link href="/exhibitions" className="group relative px-8 py-3 overflow-hidden rounded-full border border-white/20 text-[10px] tracking-[0.2em] font-bold transition-all duration-700 hover:border-white">
+          <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Enter Gallery</span>
+          <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+        </Link>
+      </GlassCard>
     </nav>
   );
 }

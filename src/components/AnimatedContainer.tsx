@@ -1,22 +1,31 @@
 "use client";
 
-import { useEffect, useRef, ReactNode } from "react";
+import { motion } from "framer-motion";
 
-export default function AnimatedContainer({ children }: { children: ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.opacity = "0";
-    el.style.transform = "translateY(16px)";
-    const raf = requestAnimationFrame(() => {
-      el.style.transition = "opacity 0.7s ease, transform 0.7s ease";
-      el.style.opacity = "1";
-      el.style.transform = "translateY(0)";
-    });
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  return <div ref={ref}>{children}</div>;
+export default function AnimatedContainer({
+  children,
+  delay = 0,
+  duration = 0.8,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  duration?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{
+        duration,
+        delay,
+        ease: [0.16, 1, 0.3, 1], // Custom cubic-bezier for high-end feel
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
 }

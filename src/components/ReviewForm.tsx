@@ -3,6 +3,7 @@
 import { useState } from "react";
 import StarRating from "./StarRating";
 import { useReviews } from "../hooks/useReviews";
+import GlassCard from "./GlassCard";
 
 export default function ReviewForm({ exhibitionId }: { exhibitionId: string }) {
   const { addReview } = useReviews(exhibitionId);
@@ -23,56 +24,60 @@ export default function ReviewForm({ exhibitionId }: { exhibitionId: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-stone-200 pt-8 space-y-5">
-      <p className="text-[8px] uppercase tracking-[0.3em] text-stone-400 font-bold">관람 후기 작성</p>
+    <GlassCard className="p-10 border-white/10 bg-white/[0.02]">
+      <form onSubmit={handleSubmit} className="space-y-10">
+        <div className="flex items-center justify-between">
+          <p className="text-[10px] uppercase tracking-[0.5em] text-zinc-500 font-mono font-bold">Feedback Loop // Signal</p>
+          <div className="flex items-center gap-6">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-600 font-bold">Resonance Index</span>
+            <StarRating value={rating} onChange={setRating} />
+          </div>
+        </div>
 
-      {/* 별점 */}
-      <div>
-        <p className="text-[9px] uppercase tracking-[0.2em] text-stone-500 mb-2">별점</p>
-        <StarRating value={rating} onChange={setRating} />
-        {!rating && <p className="text-[9px] text-stone-400 mt-1">별점을 선택해주세요</p>}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="space-y-4">
+            <label className="block text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Observer ID</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Anonymous"
+              maxLength={30}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-white/40 outline-none transition-all placeholder:text-zinc-700"
+            />
+          </div>
 
-      {/* 이름 */}
-      <div>
-        <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 mb-2">이름 (선택)</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="익명"
-          maxLength={30}
-          className="w-full bg-transparent border border-stone-200 text-sm text-stone-800 px-4 py-3 focus:outline-none focus:border-stone-500 placeholder:text-stone-300 transition-colors"
-        />
-      </div>
+          <div className="space-y-4">
+            <label className="block text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Transmission</label>
+            <div className="relative">
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="Share your resonance with this masterpiece..."
+                rows={4}
+                maxLength={500}
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-white/40 outline-none transition-all placeholder:text-zinc-700 resize-none"
+              />
+              <p className="absolute bottom-4 right-6 text-[9px] font-mono text-zinc-700">{text.length}/500</p>
+            </div>
+          </div>
+        </div>
 
-      {/* 후기 텍스트 */}
-      <div>
-        <label className="block text-[9px] uppercase tracking-[0.2em] text-stone-500 mb-2">후기</label>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="전시를 관람한 소감을 자유롭게 적어주세요."
-          rows={4}
-          maxLength={500}
-          required
-          className="w-full bg-transparent border border-stone-200 text-sm text-stone-800 px-4 py-3 focus:outline-none focus:border-stone-500 placeholder:text-stone-300 resize-none transition-colors"
-        />
-        <p className="text-right text-[9px] text-stone-300 mt-1">{text.length}/500</p>
-      </div>
-
-      <div className="flex items-center gap-4">
-        <button
-          type="submit"
-          disabled={!rating || !text.trim()}
-          className="text-[10px] uppercase tracking-[0.2em] bg-stone-900 text-white px-8 py-3 hover:bg-stone-700 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          후기 등록
-        </button>
-        {submitted && (
-          <p className="text-[9px] text-stone-500 animate-pulse">후기가 등록되었습니다.</p>
-        )}
-      </div>
-    </form>
+        <div className="flex items-center gap-8 pt-4 border-t border-white/5">
+          <button
+            type="submit"
+            disabled={!rating || !text.trim()}
+            className="group relative px-12 py-4 overflow-hidden rounded-full border border-white/20 text-[10px] tracking-[0.3em] font-bold transition-all duration-700 hover:border-white disabled:opacity-20 disabled:grayscale"
+          >
+            <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Transmit Review</span>
+            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+          </button>
+          {submitted && (
+            <p className="text-[10px] uppercase tracking-[0.2em] text-white font-bold animate-pulse shadow-text-glow">Signal Received // Saved to Archive</p>
+          )}
+        </div>
+      </form>
+    </GlassCard>
   );
 }

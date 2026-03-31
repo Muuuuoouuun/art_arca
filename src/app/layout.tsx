@@ -1,26 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import CustomCursor from "@/components/CustomCursor";
+import AmbientSound from "@/components/AmbientSound";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Art Arca — 예술들의 집합체",
-    template: "%s — Art Arca",
-  },
-  description: "예술들의 집합체, 예술과 대중, 대중과 예술. Art Hub Spring 2026 Edition.",
-  openGraph: {
-    siteName: "Art Arca",
-    locale: "ko_KR",
-    type: "website",
-    title: "Art Arca — 예술들의 집합체",
-    description: "예술들의 집합체, 예술과 대중, 대중과 예술. Art Hub Spring 2026 Edition.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Art Arca — 예술들의 집합체",
-    description: "Art Hub Spring 2026 Edition",
-  },
+  title: "Art Hub 4.2 — Synergy Edition",
+  description: "High-fidelity digital art curation. Experience the evolution of 3D assets, glassmorphism, and social synergy.",
 };
 
 export default function RootLayout({
@@ -29,11 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body>
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+    <html lang="en" className="dark scroll-smooth">
+      <body className="bg-[#030303] text-white antialiased selection:bg-white selection:text-black overflow-x-hidden font-sans">
+        <CustomCursor />
+        <AmbientSound />
+        <SmoothScrollProvider>
+          <main>{children}</main>
+        </SmoothScrollProvider>
       </body>
     </html>
   );
