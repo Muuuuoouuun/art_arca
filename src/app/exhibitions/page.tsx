@@ -10,12 +10,19 @@ import BackgroundGlow from "../../components/BackgroundGlow";
 import FilmGrain from "../../components/FilmGrain";
 import { motion } from "framer-motion";
 import BookmarkButton from "../../components/BookmarkButton";
+import { useBookmarks } from "../../hooks/useBookmarks";
 import { OrnamentalDivider, LaurelAccent, ClassicalNumber } from "../../components/ClassicalOrnament";
 
 const categories = ["All", ...Array.from(new Set(exhibitions.map((ex) => ex.category)))];
 
 export default function ExhibitionsPage() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const { isBookmarked, toggleBookmark, isLiked, toggleLike } = useBookmarks();
+
+  const filtered = selectedCategory === "All"
+    ? exhibitions
+    : exhibitions.filter((ex) => ex.category === selectedCategory);
 
   return (
     <div className="bg-[#0F0F0F] min-h-screen text-white relative overflow-hidden selection:bg-white selection:text-black">
@@ -55,7 +62,10 @@ export default function ExhibitionsPage() {
                 <p className="text-[10px] tracking-[0.4em] mb-2 uppercase font-bold text-left" style={{ color: "#C9A96E60" }}>
                   Archive Depth
                 </p>
-                <p className="text-6xl font-serif tabular-nums tracking-tighter text-left">{exhibitions.length} Items</p>
+                <p className="text-6xl font-serif tabular-nums tracking-tighter text-left">
+                  {filtered.length}
+                  <span className="text-3xl text-zinc-600"> / {exhibitions.length}</span>
+                </p>
               </GlassCard>
             </div>
           </div>
@@ -66,24 +76,28 @@ export default function ExhibitionsPage() {
           <div className="max-w-[1800px] mx-auto flex flex-wrap items-center gap-12">
             <span className="text-[10px] font-mono uppercase tracking-widest text-white/30 font-bold">Filter By Set:</span>
             <div className="flex gap-8 overflow-x-auto scrollbar-hide">
-              {categories.map((cat, i) => (
-                <button
-                  key={cat}
-                  className={`text-[10px] uppercase tracking-[0.3em] whitespace-nowrap transition-all duration-500 relative py-2 ${
-                    i === 0 ? "font-bold" : "text-zinc-600 hover:text-white"
-                  }`}
-                  style={i === 0 ? { color: "#C9A96E" } : {}}
-                >
-                  {cat}
-                  {i === 0 && (
-                    <motion.div
-                      layoutId="filter-active"
-                      className="absolute bottom-0 left-0 w-full h-[1px]"
-                      style={{ background: "#C9A96E" }}
-                    />
-                  )}
-                </button>
-              ))}
+              {categories.map((cat) => {
+                const active = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`text-[10px] uppercase tracking-[0.3em] whitespace-nowrap transition-all duration-500 relative py-2 font-bold ${
+                      active ? "" : "text-zinc-600 hover:text-white"
+                    }`}
+                    style={active ? { color: "#C9A96E" } : {}}
+                  >
+                    {cat}
+                    {active && (
+                      <motion.div
+                        layoutId="filter-active"
+                        className="absolute bottom-0 left-0 w-full h-[1px]"
+                        style={{ background: "#C9A96E" }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -99,8 +113,16 @@ export default function ExhibitionsPage() {
               <div className="col-span-2 text-right">Actions // Status</div>
             </div>
 
+            {filtered.length === 0 && (
+              <div className="py-32 text-center">
+                <p className="font-serif italic text-zinc-600 text-2xl">"{selectedCategory}" 카테고리에 해당하는 전시가 없습니다.</p>
+                <button onClick={() => setSelectedCategory("All")} className="mt-8 text-[10px] uppercase tracking-[0.3em] font-bold transition-colors" style={{ color: "#C9A96E80" }}>
+                  ← 전체 보기
+                </button>
+              </div>
+            )}
             <div className="flex flex-col">
-              {exhibitions.map((ex, i) => (
+              {filtered.map((ex, i) => (
                 <div
                   key={ex.id}
                   className="group relative block border-b border-white/5 transition-all duration-500 hover:bg-white/[0.03]"
@@ -166,13 +188,36 @@ export default function ExhibitionsPage() {
                       </span>
                     </Link>
 
-                    <div className="col-span-2 text-right flex flex-col items-end">
-                      <div className="flex items-center gap-4 mb-2">
-                        <BookmarkButton exhibitionId={ex.id} variant="card" />
+                    <div className="col-span-2 text-right flex flex-col items-end gap-3">
+                      <div className="flex items-center gap-3">
+                        {/* 좋아요 */}
+                        <button
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleLike(ex.id); }}
+                          className={`flex items-center gap-1.5 text-[9px] uppercase tracking-[0.15em] font-bold transition-all duration-300 ${
+                            isLiked(ex.id) ? "text-rose-400" : "text-zinc-600 hover:text-zinc-300"
+                          }`}
+                          aria-label="좋아요"
+                        >
+                          <svg width={14} height={14} viewBox="0 0 24 24" fill={isLiked(ex.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth={2}>
+                            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                          </svg>
+                        </button>
+                        {/* 북마크 */}
+                        <button
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleBookmark(ex.id); }}
+                          className={`flex items-center gap-1.5 text-[9px] uppercase tracking-[0.15em] font-bold transition-all duration-300 ${
+                            isBookmarked(ex.id) ? "text-white" : "text-zinc-600 hover:text-zinc-300"
+                          }`}
+                          aria-label="북마크"
+                        >
+                          <svg width={14} height={14} viewBox="0 0 24 24" fill={isBookmarked(ex.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth={2}>
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                          </svg>
+                        </button>
                       </div>
-                      <div className="flex items-center gap-2 mt-1">
+                      <div className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-                        <span className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest font-bold">Active Archive</span>
+                        <span className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest font-bold">Active</span>
                       </div>
                     </div>
 
