@@ -37,7 +37,11 @@ export function FloatingIconicObject({
         side === "right" ? "-right-24 md:-right-48" : "-left-24 md:-left-48"
       } ${className}`}
     >
-      <div className="relative w-[300px] h-[300px] md:w-[600px] md:h-[600px] mix-blend-screen opacity-80 filter drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+      <motion.div
+        animate={{ y: [0, -18, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="relative w-[300px] h-[300px] md:w-[600px] md:h-[600px] mix-blend-screen filter drop-shadow-[0_0_80px_rgba(255,255,255,0.25)]"
+      >
         <Image
           src={src}
           alt={alt}
@@ -45,7 +49,7 @@ export function FloatingIconicObject({
           className="object-contain"
           priority
         />
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

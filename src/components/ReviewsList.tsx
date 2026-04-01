@@ -23,7 +23,7 @@ export default function ReviewsList({ exhibitionId }: { exhibitionId: string }) 
            <span className="text-[10px] uppercase tracking-[0.6em] text-zinc-500 font-mono font-bold">Archive Resonance</span>
            <div className="flex items-center gap-4">
               <StarRating value={averageRating} readOnly size={16} />
-              <span className="text-2xl font-serif tabular-nums text-white">
+              <span className="text-2xl font-serif tabular-nums" style={{ color: "#C9A96E" }}>
                 {averageRating.toFixed(1)}
               </span>
            </div>

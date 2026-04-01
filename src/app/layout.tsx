@@ -1,8 +1,26 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import CustomCursor from "@/components/CustomCursor";
 import AmbientSound from "@/components/AmbientSound";
+import PageCurtain from "@/components/PageCurtain";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "700", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  weight: ["300", "400", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Art Hub 4.2 — Synergy Edition",
@@ -15,8 +33,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className="bg-[#030303] text-white antialiased selection:bg-white selection:text-black overflow-x-hidden font-sans">
+    <html lang="en" className={`dark scroll-smooth ${playfair.variable} ${cormorant.variable}`}>
+      <body className="bg-canvas text-white antialiased selection:bg-white selection:text-black overflow-x-hidden font-sans">
+        <PageCurtain />
         <CustomCursor />
         <AmbientSound />
         <SmoothScrollProvider>

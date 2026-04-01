@@ -39,6 +39,8 @@ export default function Home() {
       <BackgroundGlow color="bg-purple-600" size="w-[800px] h-[800px]" className="top-[-200px] left-[-200px]" opacity={0.18} />
       <BackgroundGlow color="bg-blue-600" size="w-[600px] h-[600px]" className="top-[40vh] right-[-100px]" opacity={0.15} />
       <BackgroundGlow color="bg-indigo-800" size="w-[1000px] h-[1000px]" className="bottom-[-300px] left-[10%]" opacity={0.22} />
+      {/* Renaissance warm glow — gilded warmth cutting through the cold */}
+      <BackgroundGlow color="bg-amber-700" size="w-[600px] h-[600px]" className="top-[10vh] left-[25%]" opacity={0.05} />
 
       <HomeNav activeSection={activeSection} />
       

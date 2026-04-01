@@ -18,11 +18,24 @@ export default function BookmarkButton({ exhibitionId, variant = "card" }: Props
         {/* 북마크 버튼 */}
         <button
           onClick={() => toggleBookmark(exhibitionId)}
-          className={`flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] border px-4 py-3 transition-all ${
+          className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] border px-4 py-3 transition-all duration-300"
+          style={
             bookmarked
-              ? "bg-stone-900 text-white border-stone-900"
-              : "border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900"
-          }`}
+              ? { background: "#C9A96E15", borderColor: "#C9A96E60", color: "#C9A96E" }
+              : { borderColor: "rgba(255,255,255,0.1)", color: "#71717a" }
+          }
+          onMouseEnter={(e) => {
+            if (!bookmarked) {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "#C9A96E40";
+              (e.currentTarget as HTMLButtonElement).style.color = "#C9A96E80";
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!bookmarked) {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.1)";
+              (e.currentTarget as HTMLButtonElement).style.color = "#71717a";
+            }
+          }}
           aria-label={bookmarked ? "북마크 해제" : "북마크 저장"}
         >
           <BookmarkIcon filled={bookmarked} />
@@ -32,11 +45,24 @@ export default function BookmarkButton({ exhibitionId, variant = "card" }: Props
         {/* 좋아요 버튼 */}
         <button
           onClick={() => toggleLike(exhibitionId)}
-          className={`flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] border px-4 py-3 transition-all ${
+          className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] border px-4 py-3 transition-all duration-300"
+          style={
             liked
-              ? "bg-stone-100 text-stone-900 border-stone-400"
-              : "border-stone-300 text-stone-600 hover:border-stone-900 hover:text-stone-900"
-          }`}
+              ? { background: "rgba(251,113,133,0.08)", borderColor: "rgba(251,113,133,0.4)", color: "rgb(251,113,133)" }
+              : { borderColor: "rgba(255,255,255,0.1)", color: "#71717a" }
+          }
+          onMouseEnter={(e) => {
+            if (!liked) {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(251,113,133,0.3)";
+              (e.currentTarget as HTMLButtonElement).style.color = "rgba(251,113,133,0.6)";
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!liked) {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(255,255,255,0.1)";
+              (e.currentTarget as HTMLButtonElement).style.color = "#71717a";
+            }
+          }}
           aria-label={liked ? "좋아요 취소" : "좋아요"}
         >
           <HeartIcon filled={liked} />
@@ -54,9 +80,8 @@ export default function BookmarkButton({ exhibitionId, variant = "card" }: Props
         e.stopPropagation();
         toggleBookmark(exhibitionId);
       }}
-      className={`absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center transition-all ${
-        bookmarked ? "text-stone-900" : "text-white drop-shadow-sm hover:text-stone-900"
-      }`}
+      className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center transition-all duration-300"
+      style={{ color: bookmarked ? "#C9A96E" : "rgba(255,255,255,0.6)" }}
       aria-label={bookmarked ? "북마크 해제" : "북마크"}
     >
       <BookmarkIcon filled={bookmarked} size={18} />

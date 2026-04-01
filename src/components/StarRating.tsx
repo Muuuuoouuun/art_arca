@@ -18,9 +18,10 @@ export default function StarRating({ value, onChange, readOnly = false, size = 2
             type="button"
             disabled={readOnly}
             onClick={() => onChange?.(star)}
+            style={{ color: filled ? "#C9A96E" : "#3f3f46" }}
             className={`transition-all ${
               readOnly ? "cursor-default" : "hover:scale-110 cursor-pointer"
-            } ${filled ? "text-stone-800" : "text-stone-300"}`}
+            }`}
             aria-label={`${star}점`}
           >
             <svg width={size} height={size} viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth={1.5}>

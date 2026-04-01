@@ -150,56 +150,53 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
 
           {/* Metadata Grid & Stats */}
           <div className="lg:col-span-4 space-y-16">
-             <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Coord. X</p>
-                   <p className="text-2xl font-serif tabular-nums">37.56°N</p>
+            {/* Stat cards — gilded treatment */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { label: "Coord. X", value: "37.56°N" },
+                { label: "Coord. Y", value: "126.9°E" },
+                { label: "Serial No.", value: `#${ex.id.slice(0,6)}` },
+                { label: "Spec Index", value: "A+ / 1.2" },
+              ].map(({ label, value }) => (
+                <div key={label} className="p-6 rounded-2xl" style={{ background: "rgba(201,169,110,0.04)", border: "1px solid rgba(201,169,110,0.18)" }}>
+                  <p className="text-[10px] uppercase tracking-widest mb-4 font-mono font-bold" style={{ color: "#C9A96E60" }}>{label}</p>
+                  <p className="text-2xl font-serif tabular-nums">{value}</p>
                 </div>
-                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Coord. Y</p>
-                   <p className="text-2xl font-serif tabular-nums">126.9°E</p>
-                </div>
-                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Serial No.</p>
-                   <p className="text-2xl font-serif tabular-nums">#{ex.id.slice(0,6)}</p>
-                </div>
-                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                   <p className="text-[10px] text-zinc-500 uppercase tracking-widest mb-4 font-mono font-bold">Spec Index</p>
-                   <p className="text-2xl font-serif tabular-nums">A+ / 1.2</p>
-                </div>
-             </div>
+              ))}
+            </div>
 
-             <AnimatedContainer delay={0.2} className="aspect-[3/4] relative rounded-3xl overflow-hidden border border-white/5 shadow-2xl group">
-                <Image src={ex.image!} alt={ex.title} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                {ex.iconicObject && (
-                  <div className="absolute bottom-8 left-8 right-8">
-                    <p className="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-2 font-mono">Iconic Artifact</p>
-                    <p className="text-2xl font-serif text-white">{ex.iconicObject.name}</p>
+            {/* Thumbnail card with CornerFlourish */}
+            <AnimatedContainer delay={0.2} className="aspect-[3/4] relative rounded-3xl overflow-hidden shadow-2xl group classical-frame" style={{ border: "1px solid rgba(201,169,110,0.2)" }}>
+              <Image src={ex.image!} alt={ex.title} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              {ex.iconicObject && (
+                <div className="absolute bottom-8 left-8 right-8">
+                  <p className="text-[10px] uppercase tracking-[0.4em] mb-2 font-mono" style={{ color: "#C9A96E60" }}>Iconic Artifact</p>
+                  <p className="text-2xl font-serif text-white">{ex.iconicObject.name}</p>
+                </div>
+              )}
+            </AnimatedContainer>
+
+            {/* Logistical data */}
+            <AnimatedContainer delay={0.3} className="space-y-12">
+              <div className="pt-12" style={{ borderTop: "1px solid rgba(201,169,110,0.15)" }}>
+                <h4 className="text-[10px] uppercase tracking-[0.4em] mb-6 font-mono font-bold" style={{ color: "#C9A96E60" }}>Logistical Data</h4>
+                <div className="space-y-8">
+                  <div className="flex justify-between items-end pb-4" style={{ borderBottom: "1px solid rgba(201,169,110,0.1)" }}>
+                    <p className="text-zinc-500 text-xs uppercase tracking-widest">Period</p>
+                    <p className="text-lg font-serif">{ex.period}</p>
                   </div>
-                )}
-             </AnimatedContainer>
-
-             <AnimatedContainer delay={0.3} className="space-y-12">
-                <div className="border-t border-zinc-900 pt-12">
-                   <h4 className="text-[10px] text-zinc-600 uppercase tracking-[0.4em] mb-6 font-mono font-bold">Logistical Data</h4>
-                   <div className="space-y-8">
-                      <div className="flex justify-between items-end border-b border-white/5 pb-4">
-                        <p className="text-zinc-500 text-xs uppercase tracking-widest">Period</p>
-                        <p className="text-lg font-serif">{ex.period}</p>
-                      </div>
-                      <div className="flex justify-between items-end border-b border-white/5 pb-4">
-                        <p className="text-zinc-500 text-xs uppercase tracking-widest">Environment</p>
-                        <p className="text-lg font-serif">{ex.location}</p>
-                      </div>
-                   </div>
+                  <div className="flex justify-between items-end pb-4" style={{ borderBottom: "1px solid rgba(201,169,110,0.1)" }}>
+                    <p className="text-zinc-500 text-xs uppercase tracking-widest">Environment</p>
+                    <p className="text-lg font-serif">{ex.location}</p>
+                  </div>
                 </div>
-
-                <ReservationModal 
-                  exhibitionTitle={ex.title} 
-                  exhibitionPeriod={ex.period} 
-                />
-             </AnimatedContainer>
+              </div>
+              <ReservationModal
+                exhibitionTitle={ex.title}
+                exhibitionPeriod={ex.period}
+              />
+            </AnimatedContainer>
           </div>
         </div>
 
@@ -211,30 +208,40 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
       </section>
 
       {/* Explore Further */}
-      <section className="px-8 md:px-20 py-40 border-t border-zinc-900 relative">
-         <BackgroundGlow color="bg-blue-700" size="w-[800px] h-[800px]" className="bottom-[-400px] left-[-200px]" opacity={0.12} />
-         <AnimatedContainer className="mb-20">
-            <h2 className="text-5xl font-serif uppercase tracking-tighter">THE <span className="italic text-zinc-500">RELATED</span> SELECTION</h2>
-         </AnimatedContainer>
+      <section className="px-8 md:px-20 py-40 relative" style={{ borderTop: "1px solid rgba(201,169,110,0.1)" }}>
+        <BackgroundGlow color="bg-amber-900" size="w-[800px] h-[800px]" className="bottom-[-400px] left-[-200px]" opacity={0.06} />
+        <AnimatedContainer className="mb-20">
+          <p className="text-[10px] uppercase tracking-[0.6em] font-bold mb-4" style={{ color: "#C9A96E60" }}>
+            Curated For You
+          </p>
+          <div className="flex items-center gap-6 mb-4">
+            <h2 className="text-5xl font-serif uppercase tracking-tighter">
+              THE <span className="italic" style={{ color: "#C9A96E70" }}>RELATED</span> SELECTION
+            </h2>
+          </div>
+          <OrnamentalDivider className="max-w-sm" />
+        </AnimatedContainer>
 
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
-            {related.map((rel, i) => (
-              <AnimatedContainer key={rel.id} delay={i * 0.1}>
-                <Link href={`/exhibitions/${rel.id}`} className="group block space-y-6">
-                  <div className="aspect-[16/10] relative rounded-2xl overflow-hidden border border-white/5 bg-zinc-900">
-                    <Image src={rel.heroImage!} alt={rel.title} fill className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+          {related.map((rel, i) => (
+            <AnimatedContainer key={rel.id} delay={i * 0.1}>
+              <Link href={`/exhibitions/${rel.id}`} className="group block space-y-6">
+                <div className="aspect-[16/10] relative rounded-2xl overflow-hidden bg-zinc-900 transition-all duration-700" style={{ border: "1px solid rgba(201,169,110,0.1)" }}>
+                  <Image src={rel.heroImage!} alt={rel.title} fill className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+                  {/* Gold corner on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{ boxShadow: "inset 0 0 0 1px rgba(201,169,110,0.3)" }} />
+                </div>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <span className="text-[10px] uppercase tracking-widest font-mono font-bold" style={{ color: "#C9A96E50" }}>{rel.artist}</span>
+                    <h3 className="text-2xl font-serif mt-2 group-hover:text-shadow-glow transition-all">{rel.title}</h3>
                   </div>
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <span className="text-[10px] text-zinc-600 uppercase tracking-widest font-mono font-bold">{rel.artist}</span>
-                      <h3 className="text-2xl font-serif mt-2 group-hover:text-shadow-glow transition-all">{rel.title}</h3>
-                    </div>
-                    <span className="font-mono text-xs text-zinc-800 group-hover:text-zinc-500 transition-colors">#{rel.id.slice(0,3)}</span>
-                  </div>
-                </Link>
-              </AnimatedContainer>
-            ))}
-         </div>
+                  <span className="font-mono text-xs transition-colors" style={{ color: "#C9A96E30" }}>#{rel.id.slice(0,3)}</span>
+                </div>
+              </Link>
+            </AnimatedContainer>
+          ))}
+        </div>
       </section>
 
       <footer className="py-20 px-8 text-center border-t border-zinc-900 relative z-10">

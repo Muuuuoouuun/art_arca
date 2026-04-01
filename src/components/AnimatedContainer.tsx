@@ -7,11 +7,13 @@ export default function AnimatedContainer({
   delay = 0,
   duration = 0.8,
   className = "",
+  style,
 }: {
   children: React.ReactNode;
   delay?: number;
   duration?: number;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <motion.div
@@ -21,9 +23,10 @@ export default function AnimatedContainer({
       transition={{
         duration,
         delay,
-        ease: [0.16, 1, 0.3, 1], // Custom cubic-bezier for high-end feel
+        ease: [0.16, 1, 0.3, 1],
       }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>

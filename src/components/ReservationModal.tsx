@@ -49,14 +49,31 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
     setStep("done");
   }
 
+  const inputStyle: React.CSSProperties = {
+    width: "100%",
+    background: "rgba(255,255,255,0.03)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "0.75rem",
+    padding: "1rem 1.5rem",
+    color: "white",
+    outline: "none",
+    transition: "border-color 0.3s",
+  };
+
   return (
     <>
-      <button 
+      <button
         onClick={() => setIsOpen(true)}
-        className="w-full group relative py-6 overflow-hidden rounded-2xl border border-white/10 text-white transition-all duration-700 hover:border-white"
+        className="w-full group relative py-6 overflow-hidden rounded-2xl text-white transition-all duration-700"
+        style={{ border: "1px solid rgba(201,169,110,0.3)" }}
+        onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#C9A96E")}
+        onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)")}
       >
-        <span className="relative z-10 text-xs tracking-[0.5em] font-bold group-hover:text-black transition-colors duration-700">RESERVE ACCESS</span>
-        <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+        <span className="relative z-10 text-xs tracking-[0.5em] font-bold transition-colors duration-700" style={{ color: "#C9A96E" }}>RESERVE ACCESS</span>
+        <div
+          className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{ background: "rgba(201,169,110,0.08)" }}
+        />
       </button>
 
       <AnimatePresence>
@@ -76,10 +93,16 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="relative w-full max-w-lg"
             >
-              <GlassCard className="p-12 border-white/20 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
+              <GlassCard
+                className="p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
+                style={{ border: "1px solid rgba(201,169,110,0.15)" }}
+              >
                 <button
                   onClick={onClose}
-                  className="absolute top-8 right-8 text-zinc-500 hover:text-white transition-colors"
+                  className="absolute top-8 right-8 transition-colors"
+                  style={{ color: "#52525b" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "#C9A96E")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "#52525b")}
                 >
                   <svg width={24} height={24} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} fill="none">
                     <path d="M18 6L6 18M6 6l12 12" />
@@ -99,7 +122,9 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                           type="text" required value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Name"
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-white/40 outline-none transition-all placeholder:text-zinc-700"
+                          style={inputStyle}
+                          onFocus={(e) => (e.target.style.borderColor = "rgba(201,169,110,0.5)")}
+                          onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
                         />
                       </div>
 
@@ -109,7 +134,9 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                           type="email" required value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Email Address"
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-white/40 outline-none transition-all placeholder:text-zinc-700"
+                          style={inputStyle}
+                          onFocus={(e) => (e.target.style.borderColor = "rgba(201,169,110,0.5)")}
+                          onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
                         />
                       </div>
 
@@ -119,7 +146,9 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                           type="date" required value={date}
                           min={new Date().toISOString().split("T")[0]}
                           onChange={(e) => setDate(e.target.value)}
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-white/40 outline-none transition-all [color-scheme:dark]"
+                          style={{ ...inputStyle, colorScheme: "dark" } as React.CSSProperties}
+                          onFocus={(e) => (e.target.style.borderColor = "rgba(201,169,110,0.5)")}
+                          onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.08)")}
                         />
                       </div>
 
@@ -130,11 +159,21 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                             <button
                               key={t} type="button"
                               onClick={() => setTime(t)}
-                              className={`text-[10px] py-3 rounded-lg border transition-all font-bold tracking-widest ${
+                              className="text-[10px] py-3 rounded-lg border transition-all font-bold tracking-widest"
+                              style={
                                 time === t
-                                  ? "bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.5)]"
-                                  : "bg-white/5 border-white/10 text-zinc-500 hover:border-white/30"
-                              }`}
+                                  ? {
+                                      background: "rgba(201,169,110,0.15)",
+                                      borderColor: "#C9A96E",
+                                      color: "#C9A96E",
+                                      boxShadow: "0 0 15px rgba(201,169,110,0.2)",
+                                    }
+                                  : {
+                                      background: "rgba(255,255,255,0.03)",
+                                      borderColor: "rgba(255,255,255,0.08)",
+                                      color: "#71717a",
+                                    }
+                              }
                             >
                               {t}
                             </button>
@@ -145,7 +184,16 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                       <button
                         type="submit"
                         disabled={!name || !email || !date || !time}
-                        className="w-full group relative py-6 overflow-hidden rounded-2xl bg-white text-black text-xs tracking-[0.5em] font-bold transition-all duration-700 disabled:opacity-20 disabled:grayscale"
+                        className="w-full group relative py-6 overflow-hidden rounded-2xl text-xs tracking-[0.5em] font-bold transition-all duration-700 disabled:opacity-20 disabled:grayscale"
+                        style={{ background: "rgba(201,169,110,0.12)", border: "1px solid rgba(201,169,110,0.4)", color: "#C9A96E" }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.2)";
+                          (e.currentTarget as HTMLButtonElement).style.borderColor = "#C9A96E";
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLButtonElement).style.background = "rgba(201,169,110,0.12)";
+                          (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.4)";
+                        }}
                       >
                         CONFIRM RESERVATION
                       </button>
@@ -153,12 +201,17 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                   </>
                 ) : (
                   <div className="text-center py-12">
-                    <motion.div 
-                      initial={{ scale: 0 }} 
-                      animate={{ scale: 1 }} 
-                      className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mx-auto mb-12 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-12"
+                      style={{
+                        background: "rgba(201,169,110,0.08)",
+                        border: "1px solid rgba(201,169,110,0.3)",
+                        boxShadow: "0 0 30px rgba(201,169,110,0.15)",
+                      }}
                     >
-                      <svg width={32} height={32} viewBox="0 0 24 24" stroke="white" strokeWidth={2} fill="none">
+                      <svg width={32} height={32} viewBox="0 0 24 24" strokeWidth={2} fill="none" style={{ stroke: "#C9A96E" }}>
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </motion.div>
@@ -171,10 +224,16 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                     </div>
                     <button
                       onClick={onClose}
-                      className="group relative px-12 py-4 overflow-hidden rounded-full border border-white/20 text-[10px] tracking-[0.3em] font-bold transition-all duration-700 hover:border-white"
+                      className="group relative px-12 py-4 overflow-hidden rounded-full text-[10px] tracking-[0.3em] font-bold transition-all duration-700"
+                      style={{ border: "1px solid rgba(201,169,110,0.3)", color: "#C9A96E" }}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.borderColor = "#C9A96E")}
+                      onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.3)")}
                     >
-                      <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Return to Archive</span>
-                      <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                      <span className="relative z-10 uppercase transition-colors duration-700">Return to Archive</span>
+                      <div
+                        className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                        style={{ background: "rgba(201,169,110,0.08)" }}
+                      />
                     </button>
                   </div>
                 )}

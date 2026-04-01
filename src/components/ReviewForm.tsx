@@ -43,7 +43,10 @@ export default function ReviewForm({ exhibitionId }: { exhibitionId: string }) {
               onChange={(e) => setName(e.target.value)}
               placeholder="Anonymous"
               maxLength={30}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-white/40 outline-none transition-all placeholder:text-zinc-700"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white outline-none transition-all placeholder:text-zinc-700"
+              style={{ "--tw-ring-color": "transparent" } as React.CSSProperties}
+              onFocus={(e) => (e.target.style.borderColor = "rgba(201,169,110,0.5)")}
+              onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
             />
           </div>
 
@@ -57,7 +60,9 @@ export default function ReviewForm({ exhibitionId }: { exhibitionId: string }) {
                 rows={4}
                 maxLength={500}
                 required
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white focus:border-white/40 outline-none transition-all placeholder:text-zinc-700 resize-none"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 text-white outline-none transition-all placeholder:text-zinc-700 resize-none"
+                onFocus={(e) => (e.target.style.borderColor = "rgba(201,169,110,0.5)")}
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
               />
               <p className="absolute bottom-4 right-6 text-[9px] font-mono text-zinc-700">{text.length}/500</p>
             </div>
@@ -68,13 +73,23 @@ export default function ReviewForm({ exhibitionId }: { exhibitionId: string }) {
           <button
             type="submit"
             disabled={!rating || !text.trim()}
-            className="group relative px-12 py-4 overflow-hidden rounded-full border border-white/20 text-[10px] tracking-[0.3em] font-bold transition-all duration-700 hover:border-white disabled:opacity-20 disabled:grayscale"
+            className="group relative px-12 py-4 overflow-hidden rounded-full text-[10px] tracking-[0.3em] font-bold transition-all duration-700 disabled:opacity-20 disabled:grayscale"
+            style={{ border: "1px solid rgba(201,169,110,0.4)" }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "#C9A96E";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.4)";
+            }}
           >
-            <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Transmit Review</span>
-            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+            <span className="relative z-10 transition-colors duration-700 uppercase" style={{ color: "#C9A96E" }}>Transmit Review</span>
+            <div
+              className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{ background: "rgba(201,169,110,0.1)" }}
+            />
           </button>
           {submitted && (
-            <p className="text-[10px] uppercase tracking-[0.2em] text-white font-bold animate-pulse shadow-text-glow">Signal Received // Saved to Archive</p>
+            <p className="text-[10px] uppercase tracking-[0.2em] font-bold animate-pulse" style={{ color: "#C9A96E", textShadow: "0 0 20px rgba(201,169,110,0.5)" }}>Signal Received // Saved to Archive</p>
           )}
         </div>
       </form>
