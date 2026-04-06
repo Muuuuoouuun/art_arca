@@ -1,7 +1,7 @@
 "use client";
 
 interface Props {
-  value: number;        // 0–5
+  value: number;
   onChange?: (v: number) => void;
   readOnly?: boolean;
   size?: number;
@@ -19,8 +19,8 @@ export default function StarRating({ value, onChange, readOnly = false, size = 2
             disabled={readOnly}
             onClick={() => onChange?.(star)}
             className={`transition-all ${
-              readOnly ? "cursor-default" : "hover:scale-110 cursor-pointer"
-            } ${filled ? "text-stone-800" : "text-stone-300"}`}
+              readOnly ? "cursor-default" : "hover:scale-110 cursor-pointer btn-press"
+            } ${filled ? "text-stone-800 dark:text-stone-200" : "text-stone-300 dark:text-stone-700"}`}
             aria-label={`${star}점`}
           >
             <svg width={size} height={size} viewBox="0 0 24 24" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth={1.5}>

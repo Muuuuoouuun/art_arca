@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,15 +7,27 @@
 :root {
   --background: #F2F0ED;
   --foreground: #1a1a1a;
+  --font-playfair: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.dark {
+  --background: #18181A;
+  --foreground: #F2F0ED;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
+  font-family: var(--font-inter, system-ui, sans-serif);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer base {
@@ -22,4 +36,66 @@ body {
     padding: 0;
     margin: 0;
   }
+
+  /* Clean focus rings — visible only on keyboard navigation */
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* Remove focus outline on mouse click */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Smooth image loading */
+  img {
+    transition: opacity 0.3s ease;
+  }
+
+  /* Button press micro-interaction */
+  .btn-press:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Custom scrollbar — subtle, editorial */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5c0ba;
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #44403c;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #78716c;
+}
+
+/* Selection color */
+::selection {
+  background: #1a1a1a;
+  color: #F2F0ED;
+}
+
+.dark ::selection {
+  background: #F2F0ED;
+  color: #1a1a1a;
 }

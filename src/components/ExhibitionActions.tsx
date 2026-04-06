@@ -24,25 +24,21 @@ export default function ExhibitionActions({
 
   return (
     <>
-      {/* 좋아요 / 북마크 / 공유 */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-6 mt-12 pt-8 border-t border-stone-200">
+      {/* 북마크 / 공유 */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-6 mt-12 pt-8 border-t border-stone-200 dark:border-stone-800">
         <BookmarkButton exhibitionId={exhibitionId} variant="detail" />
         <ShareButtons title={exhibitionTitle} titleKo={exhibitionTitleKo} />
       </div>
 
-      {/* 예약 버튼 (사이드바에서 트리거 — 여기선 인라인 렌더 안 함) */}
-      {/* 사이드바 예약 버튼은 별도 ReservationTrigger 사용 */}
-
       {/* 관람 후기 */}
-      <section className="mt-16 pt-8 border-t border-stone-200">
-        <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 mb-12 font-bold">Reviews</p>
+      <section className="mt-16 pt-8 border-t border-stone-200 dark:border-stone-800">
+        <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 dark:text-stone-500 mb-12 font-bold">Reviews</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <ReviewsList exhibitionId={exhibitionId} />
           <ReviewForm exhibitionId={exhibitionId} />
         </div>
       </section>
 
-      {/* 예약 모달 */}
       {reservationOpen && (
         <ReservationModal
           exhibitionTitle={exhibitionTitle}
@@ -54,7 +50,7 @@ export default function ExhibitionActions({
   );
 }
 
-/** 사이드바에 배치되는 예약 버튼 — 모달 상태를 독립적으로 관리 */
+/** 사이드바에 배치되는 예약 버튼 */
 export function ReservationTrigger({
   exhibitionTitle,
   exhibitionPeriod,
@@ -68,7 +64,7 @@ export function ReservationTrigger({
     <>
       <button
         onClick={() => setOpen(true)}
-        className="w-full text-[10px] uppercase tracking-[0.2em] bg-stone-900 text-white py-4 hover:bg-stone-700 transition-all"
+        className="w-full text-[10px] uppercase tracking-[0.2em] bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 py-4 hover:bg-stone-700 dark:hover:bg-stone-300 transition-all btn-press"
       >
         방문 예약
       </button>
