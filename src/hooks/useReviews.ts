@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import { useLocalStorage } from "./useLocalStorage";
+import { STORAGE_KEYS } from "@/lib/site";
 
 export interface Review {
   id: string;
@@ -13,7 +14,7 @@ export interface Review {
 }
 
 export function useReviews(exhibitionId?: string) {
-  const [allReviews, setAllReviews] = useLocalStorage<Review[]>("art-arca:reviews", []);
+  const [allReviews, setAllReviews] = useLocalStorage<Review[]>(STORAGE_KEYS.reviews, []);
 
   const reviews = exhibitionId
     ? allReviews.filter((r) => r.exhibitionId === exhibitionId)

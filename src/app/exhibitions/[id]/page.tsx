@@ -11,10 +11,9 @@ import BackgroundGlow from "../../../components/BackgroundGlow";
 import BookmarkButton from "../../../components/BookmarkButton";
 import ShareButtons from "../../../components/ShareButtons";
 import ReservationModal from "../../../components/ReservationModal";
-import ReviewForm from "../../../components/ReviewForm";
-import ReviewsList from "../../../components/ReviewsList";
-import GlassCard from "../../../components/GlassCard";
-import { OrnamentalDivider, LaurelAccent } from "../../../components/ClassicalOrnament";
+import ExhibitionTabs from "../../../components/ExhibitionTabs";
+import { OrnamentalDivider } from "../../../components/ClassicalOrnament";
+import { SITE_NAME_UPPER, SITE_NAME } from "@/lib/site";
 
 export async function generateStaticParams() {
   return exhibitions.map((ex) => ({ id: ex.id }));
@@ -26,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!ex) return { title: "Not Found" };
 
   return {
-    title: `${ex.title} — Art Hub 4.2 Synergy`,
+    title: `${ex.title} — ${SITE_NAME}`,
     description: ex.description,
   };
 }
@@ -46,7 +45,7 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
       
       {/* Dynamic Header */}
       <nav className="fixed top-0 left-0 w-full z-50 px-8 py-8 flex justify-between items-center mix-blend-difference">
-        <Link href="/" className="text-lg font-serif tracking-[0.5em] hover:italic transition-all">ART HUB 4.2</Link>
+        <Link href="/" className="text-lg font-serif tracking-[0.5em] hover:italic transition-all">{SITE_NAME_UPPER}</Link>
         <Link href="/exhibitions" className="text-[10px] uppercase tracking-[0.3em] border-b border-white/20 pb-1 hover:border-white transition-all">Back to Index</Link>
       </nav>
 
@@ -73,7 +72,7 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
         <div className="absolute left-10 top-[30%] hidden xl:flex flex-col gap-12 z-20">
           <GlyphArtifact label="Archive ID" value={ex.id.slice(0,8).toUpperCase()} />
           <GlyphArtifact label="Object Class" value="Iconic Masterpiece" />
-          <GlyphArtifact label="Ref. System" value="Synergy Layout v4.2" />
+          <GlyphArtifact label="Ref. System" value="Cabinet Layout" />
         </div>
         
         <div className="relative z-10 max-w-[1400px]">
@@ -134,17 +133,7 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
                  ))}
                </div>
 
-               <div className="mt-32 space-y-20 pt-20" style={{ borderTop: "1px solid #C9A96E15" }}>
-                 <div className="flex flex-col gap-8">
-                   <div className="flex items-center gap-6">
-                     <h3 className="text-3xl font-serif tracking-tight">Community Resonance</h3>
-                     <OrnamentalDivider className="flex-1 max-w-xs" />
-                   </div>
-                   <LaurelAccent className="mb-2" />
-                   <ReviewForm exhibitionId={ex.id} />
-                 </div>
-                 <ReviewsList exhibitionId={ex.id} />
-               </div>
+               <ExhibitionTabs exhibition={ex} status={status} />
             </AnimatedContainer>
           </div>
 
@@ -245,7 +234,7 @@ export default async function ExhibitionDetailPage({ params }: { params: Promise
       </section>
 
       <footer className="py-20 px-8 text-center border-t border-zinc-900 relative z-10">
-         <p className="text-[10px] text-zinc-700 tracking-[0.4em] font-mono uppercase font-bold">Art Hub 4.2 — Synergy Integration Update // Metadata Integrated</p>
+         <p className="text-[10px] text-zinc-700 tracking-[0.4em] font-mono uppercase font-bold">Art Arca Curatorial Metadata // Live Archive</p>
       </footer>
     </div>
   );

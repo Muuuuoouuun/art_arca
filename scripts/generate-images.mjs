@@ -148,7 +148,6 @@ async function main() {
     // await sleep(2000);
 
     // 3. Iconic Object (NEW for 4.0, UPDATED for 4.1 pure black)
-    const objName = ex.objectPrompt.match(/3D (.*?),/)?.[1]?.toLowerCase().replace(/\s+/g, "-") || ex.id;
     // Actually using a simpler mapping for object paths to match data.ts
     const objectMap = {
       "afrofuturism-disco": "chrome-mask",

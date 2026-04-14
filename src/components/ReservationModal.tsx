@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import GlassCard from "./GlassCard";
 import { motion, AnimatePresence } from "framer-motion";
+import { STORAGE_KEYS } from "@/lib/site";
 
 interface Props {
   exhibitionTitle: string;
@@ -18,13 +19,37 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [minDate, setMinDate] = useState("");
 
-  const onClose = () => setIsOpen(false);
+  const resetForm = useCallback(() => {
+    setStep("form");
+    setName("");
+    setEmail("");
+    setDate("");
+    setTime("");
+  }, []);
+
+  const openModal = useCallback(() => {
+    resetForm();
+    setIsOpen(true);
+  }, [resetForm]);
+
+  const onClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); },
     [onClose]
   );
+
+  useEffect(() => {
+    setMinDate(
+      new Date(Date.now() - new Date().getTimezoneOffset() * 60_000)
+        .toISOString()
+        .split("T")[0]
+    );
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -42,9 +67,9 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      const existing = JSON.parse(localStorage.getItem("art-hub:reservations") ?? "[]");
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEYS.reservations) ?? "[]");
       existing.push({ exhibitionTitle, name, email, date, time, createdAt: new Date().toISOString() });
-      localStorage.setItem("art-hub:reservations", JSON.stringify(existing));
+      localStorage.setItem(STORAGE_KEYS.reservations, JSON.stringify(existing));
     } catch { /* ignore */ }
     setStep("done");
   }
@@ -63,13 +88,13 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
   return (
     <>
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={openModal}
         className="w-full group relative py-6 overflow-hidden rounded-2xl text-white transition-all duration-700"
         style={{ border: "1px solid rgba(201,169,110,0.3)" }}
         onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#C9A96E")}
         onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)")}
       >
-        <span className="relative z-10 text-xs tracking-[0.5em] font-bold transition-colors duration-700" style={{ color: "#C9A96E" }}>RESERVE ACCESS</span>
+        <span className="relative z-10 text-xs tracking-[0.5em] font-bold transition-colors duration-700" style={{ color: "#C9A96E" }}>RESERVE VISIT</span>
         <div
           className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ background: "rgba(201,169,110,0.08)" }}
@@ -92,6 +117,9 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               className="relative w-full max-w-lg"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="reservation-title"
             >
               <GlassCard
                 className="p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
@@ -100,6 +128,7 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                 <button
                   onClick={onClose}
                   className="absolute top-8 right-8 transition-colors"
+                  aria-label="예약 모달 닫기"
                   style={{ color: "#52525b" }}
                   onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "#C9A96E")}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "#52525b")}
@@ -111,8 +140,8 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
 
                 {step === "form" ? (
                   <>
-                    <p className="text-[10px] uppercase tracking-[0.5em] text-zinc-500 mb-8 font-mono font-bold">Secure Access Protocol</p>
-                    <h2 className="text-4xl font-serif tracking-tight mb-2">{exhibitionTitle}</h2>
+                    <p className="text-[10px] uppercase tracking-[0.5em] text-zinc-500 mb-8 font-mono font-bold">Reservation Request</p>
+                    <h2 id="reservation-title" className="text-4xl font-serif tracking-tight mb-2">{exhibitionTitle}</h2>
                     <p className="text-xs text-zinc-500 mb-12 font-mono uppercase tracking-widest">{exhibitionPeriod}</p>
 
                     <form onSubmit={handleSubmit} className="space-y-8">
@@ -144,7 +173,7 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                         <label className="block text-[10px] uppercase tracking-[0.3em] text-zinc-600 font-bold">Temporal Coordinates</label>
                         <input
                           type="date" required value={date}
-                          min={new Date().toISOString().split("T")[0]}
+                          min={minDate}
                           onChange={(e) => setDate(e.target.value)}
                           style={{ ...inputStyle, colorScheme: "dark" } as React.CSSProperties}
                           onFocus={(e) => (e.target.style.borderColor = "rgba(201,169,110,0.5)")}
@@ -195,7 +224,7 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                           (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,169,110,0.4)";
                         }}
                       >
-                        CONFIRM RESERVATION
+                        CONFIRM VISIT
                       </button>
                     </form>
                   </>
@@ -215,11 +244,13 @@ export default function ReservationModal({ exhibitionTitle, exhibitionPeriod }: 
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </motion.div>
-                    <p className="text-[10px] uppercase tracking-[0.6em] text-zinc-500 mb-6 font-mono font-bold">Verification Success</p>
-                    <h3 className="text-4xl font-serif tracking-tight mb-8">Access Confirmed</h3>
+                    <p className="text-[10px] uppercase tracking-[0.6em] text-zinc-500 mb-6 font-mono font-bold">Reservation Complete</p>
+                    <h3 className="text-4xl font-serif tracking-tight mb-8">Visit Confirmed</h3>
                     <div className="space-y-2 mb-12 text-zinc-400 font-light">
                       <p className="text-xl text-white">{name}</p>
-                      <p className="text-lg">{date} // {time}</p>
+                      <p className="text-lg">
+                        {date} {" / "} {time}
+                      </p>
                       <p className="text-sm italic mt-4">{exhibitionTitle}</p>
                     </div>
                     <button

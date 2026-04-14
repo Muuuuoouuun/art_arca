@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Playfair_Display, Cormorant_Garamond, Inter } from "next/font/google";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import CustomCursor from "@/components/CustomCursor";
 import AmbientSound from "@/components/AmbientSound";
 import PageCurtain from "@/components/PageCurtain";
+import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -22,9 +23,16 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Art Hub 4.2 — Synergy Edition",
-  description: "High-fidelity digital art curation. Experience the evolution of 3D assets, glassmorphism, and social synergy.",
+  title: `${SITE_NAME} — Seoul Exhibition Archive`,
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({
@@ -33,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark scroll-smooth ${playfair.variable} ${cormorant.variable}`}>
+    <html lang="ko" className={`dark scroll-smooth ${playfair.variable} ${cormorant.variable} ${inter.variable}`}>
       <body className="bg-canvas text-white antialiased selection:bg-white selection:text-black overflow-x-hidden font-sans">
         <PageCurtain />
         <CustomCursor />

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import BookmarkButton from "./BookmarkButton";
 import ShareButtons from "./ShareButtons";
 import ReservationModal from "./ReservationModal";

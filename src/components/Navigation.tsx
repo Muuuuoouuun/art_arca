@@ -5,9 +5,11 @@ import { usePathname } from "next/navigation";
 import { useBookmarks } from "../hooks/useBookmarks";
 import GlassCard from "./GlassCard";
 import { motion } from "framer-motion";
+import { SITE_NAME_UPPER } from "@/lib/site";
 
 const navLinks = [
   { href: "/exhibitions", label: "Registry" },
+  { href: "/guide", label: "Guide" },
   { href: "/bookmarks", label: "Saved" },
   { href: "/about", label: "System" },
 ];
@@ -24,8 +26,8 @@ export default function Navigation() {
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-4"
         >
-          <Link href="/" className="text-white tracking-[0.5em] font-serif text-lg font-bold">ART HUB 4.2</Link>
-          <span className="hidden sm:block text-zinc-500 font-sans text-[9px] tracking-[0.2em] border-l border-zinc-800 pl-4 py-1 uppercase font-bold">Synergy Update<br/>Edition</span>
+          <Link href="/" className="text-white tracking-[0.5em] font-serif text-lg font-bold">{SITE_NAME_UPPER}</Link>
+          <span className="hidden sm:block text-zinc-500 font-sans text-[9px] tracking-[0.2em] border-l border-zinc-800 pl-4 py-1 uppercase font-bold">Seoul<br/>Archive</span>
         </motion.div>
         
         <div className="hidden md:flex gap-12 items-center text-[10px] uppercase tracking-[0.2em] font-bold">
@@ -51,7 +53,7 @@ export default function Navigation() {
         </div>
 
         <Link href="/exhibitions" className="group relative px-8 py-3 overflow-hidden rounded-full border border-white/20 text-[10px] tracking-[0.2em] font-bold transition-all duration-700 hover:border-white">
-          <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Enter Gallery</span>
+          <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Browse Season</span>
           <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
         </Link>
       </GlassCard>

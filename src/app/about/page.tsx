@@ -3,10 +3,11 @@ import AnimatedContainer from "../../components/AnimatedContainer";
 import FilmGrain from "../../components/FilmGrain";
 import BackgroundGlow from "../../components/BackgroundGlow";
 import { OrnamentalDivider, LaurelAccent, CornerFlourish, ClassicalNumber } from "../../components/ClassicalOrnament";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata = {
-  title: "About — Art Hub 4.2",
-  description: "Art Hub 4.2: Synergy Update — A digital lens for the new curation frontier.",
+  title: `About — ${SITE_NAME}`,
+  description: `The curatorial philosophy and visual system behind ${SITE_NAME}, a cinematic Seoul-wide exhibition archive.`,
 };
 
 const values = [
@@ -20,7 +21,7 @@ const values = [
     number: "02",
     title: "디지털 트윈 & 실체",
     description:
-      "물리적 예술의 무게를 디지털 공간에 구현합니다. Art Hub 4.2는 초고해상도 렌더링과 딥 레이아웃 시스템을 통해 작품의 질감과 존재감을 보존합니다.",
+      `물리적 예술의 무게를 디지털 공간에 구현합니다. ${SITE_NAME}는 초고해상도 렌더링과 딥 레이아웃 시스템을 통해 작품의 질감과 존재감을 보존합니다.`,
   },
   {
     number: "03",
@@ -77,7 +78,7 @@ export default function AboutPage() {
         <header className="px-8 md:px-24 pt-48 pb-24 border-b relative z-10" style={{ borderColor: "#C9A96E15" }}>
           <div className="max-w-[1800px] mx-auto">
             <p className="text-[10px] uppercase tracking-[0.6em] mb-6 font-bold" style={{ color: "#C9A96E80" }}>
-              Node 4.2 // Origin Story
+              Seoul Archive // Origin Story
             </p>
             <LaurelAccent className="mb-8" />
             <h1 className="text-8xl md:text-[10vw] font-serif tracking-tighter leading-none font-bold uppercase">
@@ -100,7 +101,7 @@ export default function AboutPage() {
             </div>
             <div className="space-y-12">
               <p className="text-xl leading-relaxed text-zinc-400 font-light">
-                Art Hub 4.2는 2026년 서울에서 시작된 독립 아트 큐레이션 플랫폼의 정점입니다. 우리는 동시대 예술과 역사적 아이콘을 결합하여, 단순한 갤러리 웹사이트를 넘어선 &apos;디지털 박물관&apos;을 지향합니다.
+                {SITE_NAME}는 2026년 서울에서 시작된 독립 아트 큐레이션 아카이브입니다. 우리는 동시대 예술과 역사적 아이콘을 한 계절의 흐름 안에 묶어, 단순한 갤러리 웹사이트가 아니라 다시 찾아오는 전시 기록장을 만들고자 합니다.
               </p>
               <p className="text-xl leading-relaxed text-zinc-400 font-light">
                 우리의 딥 레이아웃 기술은 각 작품이 가진 서사를 공간적으로 배치하며, 아이코닉 오브젝트들은 물리적 한계를 벗어나 관람객의 화면 속에서 새롭게 숨 쉽니다.
@@ -170,10 +171,10 @@ export default function AboutPage() {
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-16 text-center md:text-left">
               <div>
                 <h2 className="text-5xl md:text-7xl font-serif tracking-tight mb-8">
-                  Art Hub 4.2<br /><span className="italic text-zinc-500">Master Registry</span>
+                  {SITE_NAME}<br /><span className="italic text-zinc-500">Season Archive</span>
                 </h2>
                 <p className="text-zinc-500 text-xl font-light max-w-xl">
-                  가장 진보된 디지털 아트 큐레이션을 지금 바로 경험해 보세요. 아이코닉 에디션이 당신을 기다립니다.
+                  서울 곳곳의 전시를 저장하고, 예약하고, 다시 돌아올 수 있는 큐레이션 아카이브를 지금 둘러보세요.
                 </p>
               </div>
               <Link
@@ -189,7 +190,7 @@ export default function AboutPage() {
         </section>
 
         <footer className="py-20 text-center font-mono uppercase tracking-[0.5em] text-[10px]" style={{ color: "#C9A96E20" }}>
-          Art Hub 4.2 Architecture Spec-04 // All Systems Go.
+          Art Arca Curatorial Notes // Seoul Archive
         </footer>
       </AnimatedContainer>
     </div>

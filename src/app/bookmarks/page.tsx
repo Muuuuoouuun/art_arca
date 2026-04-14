@@ -10,6 +10,7 @@ import GlassCard from "../../components/GlassCard";
 import BackgroundGlow from "../../components/BackgroundGlow";
 import FilmGrain from "../../components/FilmGrain";
 import { motion } from "framer-motion";
+import { SITE_NAME_UPPER } from "@/lib/site";
 
 export default function BookmarksPage() {
   const { bookmarks } = useBookmarks();
@@ -21,7 +22,7 @@ export default function BookmarksPage() {
       <BackgroundGlow color="bg-indigo-700" size="w-[1000px] h-[1000px]" className="top-[-300px] left-[-300px]" opacity={0.20} />
       
       <nav className="fixed top-0 left-0 w-full z-50 px-8 py-8 flex justify-between items-center mix-blend-difference">
-        <Link href="/" className="text-lg font-serif tracking-[0.5em] hover:italic transition-all">ART HUB 4.2</Link>
+        <Link href="/" className="text-lg font-serif tracking-[0.5em] hover:italic transition-all">{SITE_NAME_UPPER}</Link>
         <Link href="/exhibitions" className="text-[10px] uppercase tracking-[0.3em] border-b border-white/20 pb-1 hover:border-white transition-all">Back to Index</Link>
       </nav>
 
@@ -55,13 +56,13 @@ export default function BookmarksPage() {
                    <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
                  </svg>
               </div>
-              <p className="text-3xl font-serif mb-6 italic text-zinc-400">"The void is currently silent."</p>
-              <p className="text-sm text-zinc-600 tracking-widest uppercase mb-12 font-mono">Your collection has no active signals.</p>
+              <p className="text-3xl font-serif mb-6 italic text-zinc-300">저장한 작품이 아직 없습니다.</p>
+              <p className="text-sm text-zinc-500 tracking-[0.3em] uppercase mb-12 font-mono">마음에 드는 작품을 저장해 두고 다시 돌아오세요.</p>
               <Link
                 href="/exhibitions"
                 className="group relative px-12 py-4 overflow-hidden rounded-full border border-white/20 text-[10px] tracking-[0.3em] font-bold transition-all duration-700 hover:border-white"
               >
-                <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Discover Masterpieces</span>
+                <span className="relative z-10 group-hover:text-black transition-colors duration-700 uppercase">Browse Season</span>
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               </Link>
             </div>
@@ -109,7 +110,7 @@ export default function BookmarksPage() {
 
         <footer className="py-40 px-8 text-center relative z-10">
            <div className="max-w-xl mx-auto space-y-8">
-              <p className="text-zinc-700 text-[10px] tracking-[0.5em] font-mono uppercase font-bold">Art Hub 4.2 Saved Collection Registry // Secure Node</p>
+              <p className="text-zinc-700 text-[10px] tracking-[0.5em] font-mono uppercase font-bold">Art Arca Saved Collection // Seoul Archive</p>
            </div>
         </footer>
       </AnimatedContainer>

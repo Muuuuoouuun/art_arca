@@ -29,7 +29,7 @@ export const exhibitions: Exhibition[] = [
     category: "디지털 콜라주 / Digital Collage",
     date: "2026.04",
     period: "2026.04.01 — 2026.05.15",
-    location: "Art Hub Center, 서울",
+    location: "Art Arca Center, 서울",
     description: "은하수 위에서 펼쳐지는 아프로 비트와 네온 디스코의 향연",
     longDescription: "70년대 디스코 문화의 화려한 미학과 아프리카 전통 문양, 그리고 광활한 우주적 상상력이 결합된 전시입니다. 황금빛 아프로 헤어와 크롬 재질의 의상을 입은 인물들이 초현실적인 성운 속에서 춤추는 비주얼은 인류의 기원과 미래적 해방을 동시에 노래합니다.",
     tags: ["아프로퓨처리즘", "디스코", "초현실주의"],

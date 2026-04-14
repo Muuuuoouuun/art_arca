@@ -81,7 +81,7 @@ export default function ExhibitionsGrid({ exhibitions }: Props) {
         <div className="px-8 md:px-24 pt-8 pb-0">
           <p className="text-[9px] uppercase tracking-[0.2em] text-stone-400">
             {filtered.length}개 결과
-            {query && <span className="ml-2 text-stone-500">"{query}"</span>}
+            {query && <span className="ml-2 text-stone-500">&ldquo;{query}&rdquo;</span>}
           </p>
         </div>
       )}

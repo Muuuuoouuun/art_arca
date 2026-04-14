@@ -10,12 +10,16 @@ import { exhibitions } from "../../lib/data";
 
 export default function ArchiveSection() {
   const rows: typeof exhibitions[] = [];
+  const locationCount = new Set(exhibitions.map((exhibition) => exhibition.location)).size;
   for (let i = 0; i < exhibitions.length; i += 4) {
     rows.push(exhibitions.slice(i, i + 4));
   }
 
   return (
-    <section id="curation" className="px-4 md:px-16 py-40 relative bg-gradient-to-b from-zinc-100 to-zinc-50 text-black shadow-[inset_0_20px_50px_rgba(0,0,0,0.5)]">
+    <section
+      id="curation"
+      className="relative bg-gradient-to-b from-[#F3EBDD] to-[#FAF6EF] px-4 py-32 text-black shadow-[inset_0_20px_50px_rgba(0,0,0,0.45)] md:px-16 md:py-40"
+    >
 
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/20 to-transparent pointer-events-none" />
 
@@ -33,14 +37,41 @@ export default function ArchiveSection() {
       <div className="max-w-[1400px] mx-auto">
         {/* Section header with classical ornaments */}
         <AnimatedContainer className="mb-20 text-center md:text-left">
-          <p className="font-sans text-[10px] mb-4 tracking-[0.4em] uppercase font-bold" style={{ color: "#9A7A4A" }}>
-            The Complete Editions
-          </p>
-          <LaurelAccent color="#9A7A4A" className="mb-6 md:justify-start" />
-          <h2 className="text-5xl md:text-7xl font-sans font-bold tracking-tighter leading-none text-zinc-900">
-            Archive.
-          </h2>
-          <OrnamentalDivider className="mt-8 max-w-xs" color="#9A7A4A" />
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.4em]" style={{ color: "#9A7A4A" }}>
+                Full Season Index
+              </p>
+              <LaurelAccent color="#9A7A4A" className="mb-6 md:justify-start" />
+              <h2 className="text-5xl font-serif font-bold leading-none tracking-tighter text-zinc-900 md:text-7xl">
+                The Cabinet
+                <br />
+                of Editions.
+              </h2>
+              <OrnamentalDivider className="mt-8 max-w-xs" color="#9A7A4A" />
+            </div>
+            <div className="space-y-5 lg:pb-2">
+              <p className="text-base leading-7 text-zinc-700 md:text-lg">
+                Every edition keeps its artist, venue, object, and atmosphere. This section should
+                feel warmer and more tactile than the hero, like moving from neon glass into paper,
+                card stock, and collector labels.
+              </p>
+              <div className="flex flex-wrap gap-3 text-[10px] font-bold uppercase tracking-[0.3em]">
+                <span
+                  className="rounded-full px-4 py-2"
+                  style={{ border: "1px solid rgba(154,122,74,0.2)", color: "#9A7A4A" }}
+                >
+                  {exhibitions.length} editions
+                </span>
+                <span
+                  className="rounded-full px-4 py-2"
+                  style={{ border: "1px solid rgba(154,122,74,0.2)", color: "#9A7A4A" }}
+                >
+                  {locationCount} Seoul venues
+                </span>
+              </div>
+            </div>
+          </div>
         </AnimatedContainer>
 
         <div className="flex flex-col gap-32 pb-20">

@@ -11,7 +11,7 @@ export default {
       fontFamily: {
         serif: ["var(--font-playfair)", "Georgia", "Times New Roman", "serif"],
         display: ["var(--font-cormorant)", "Georgia", "serif"],
-        sans: ["Helvetica Neue", "Arial", "sans-serif"],
+        sans: ["var(--font-inter)", "Helvetica Neue", "Arial", "sans-serif"],
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       colors: {

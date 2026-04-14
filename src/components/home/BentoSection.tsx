@@ -12,28 +12,41 @@ import { exhibitions } from "../../lib/data";
 
 export default function BentoSection() {
   return (
-    <section id="bento" className="px-4 md:px-8 py-40 relative">
+    <section id="bento" className="relative px-4 py-28 md:px-8 md:py-40">
       <div className="max-w-[1800px] mx-auto">
 
         {/* Section header */}
         <AnimatedContainer className="mb-24">
-          <div className="flex justify-between items-end mb-6">
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
-              <p className="font-mono text-xs mb-3 tracking-[0.4em] uppercase font-bold" style={{ color: "#C9A96E80" }}>
-                Featured Collections
+              <p className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.4em]" style={{ color: "#C9A96E80" }}>
+                Current Program
               </p>
               <h2 className="text-6xl md:text-8xl font-serif tracking-tighter leading-none">
-                THE <span className="italic text-zinc-500">ICONIC</span><br />COLLECTION
+                Three entry points
+                <br />
+                into the <span className="italic text-zinc-500">season.</span>
               </h2>
+              <OrnamentalDivider className="mt-8 max-w-md" />
+              <p className="mt-6 max-w-2xl text-base leading-7 text-zinc-400 md:text-lg">
+                Start with the marquee exhibition, the tactile object study, or the visit-planning
+                layer. Each card is a different pace, not just a different size.
+              </p>
             </div>
-            <div className="hidden md:block text-right">
-              <GlassCard className="px-8 py-4" style={{ borderBottom: "1px solid #C9A96E30" }}>
-                <p className="text-[10px] tracking-[0.2em] mb-1 uppercase font-bold" style={{ color: "#C9A96E60" }}>Archive Depth</p>
-                <p className="text-4xl font-serif tabular-nums tracking-tighter">10 / 2026</p>
+            <div className="hidden md:block justify-self-end text-right">
+              <GlassCard className="max-w-sm px-8 py-5" style={{ borderBottom: "1px solid #C9A96E30" }}>
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "#C9A96E60" }}>
+                  Season Index
+                </p>
+                <p className="text-4xl font-serif tabular-nums tracking-tighter">
+                  {exhibitions.length} Editions
+                </p>
+                <p className="mt-3 text-sm leading-6 text-zinc-400">
+                  Save the work, reserve the visit, and return through the archive.
+                </p>
               </GlassCard>
             </div>
           </div>
-          <OrnamentalDivider className="max-w-md" />
         </AnimatedContainer>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[400px]">
@@ -67,7 +80,7 @@ export default function BentoSection() {
             <div className="absolute bottom-0 left-0 p-16 z-30 w-full flex justify-between items-end">
               <Link href={`/exhibitions/${exhibitions[6].id}`} className="max-w-2xl">
                 <span className="text-[10px] uppercase tracking-[0.5em] mb-6 block font-bold" style={{ color: "#C9A96E60" }}>
-                  Masterpiece Exhibition
+                  Opening Night Pick
                 </span>
                 <h3 className="text-6xl md:text-7xl font-serif mb-8 leading-none tracking-tighter group-hover:text-shadow-glow transition-all duration-700">
                   {exhibitions[6].title}
@@ -78,12 +91,15 @@ export default function BentoSection() {
               </Link>
               <Link
                 href={`/exhibitions/${exhibitions[6].id}`}
-                className="w-24 h-24 rounded-full border backdrop-blur-xl flex items-center justify-center group-hover:text-black transition-all duration-700 transform group-hover:rotate-45"
-                style={{ borderColor: "#C9A96E40", backgroundColor: "transparent" }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#C9A96E")}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
+                aria-label={`Open ${exhibitions[6].title}`}
+                className="group/cta relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border backdrop-blur-xl transition-all duration-700 group-hover:rotate-45"
+                style={{ borderColor: "#C9A96E40" }}
               >
-                <span className="text-2xl">→</span>
+                <span className="relative z-10 text-2xl transition-colors duration-700 group-hover/cta:text-black">→</span>
+                <div
+                  className="absolute inset-0 translate-y-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/cta:translate-y-0"
+                  style={{ background: "#C9A96E" }}
+                />
               </Link>
             </div>
           </div>
@@ -131,13 +147,16 @@ export default function BentoSection() {
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative w-[300px] h-[300px] z-10 drop-shadow-[0_0_60px_rgba(180,100,255,0.4)]"
+                  className="relative z-10 h-[300px] w-[300px] drop-shadow-[0_0_60px_rgba(201,169,110,0.22)]"
                 >
                   <Image src="/images/objects/chrome-mask.webp" alt="Chrome Mask" fill className="object-contain mix-blend-screen group-hover:scale-110 transition-transform duration-700" />
                 </motion.div>
-                <div className="absolute inset-0 bg-radial-gradient from-purple-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-radial-gradient from-emerald-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
               <div className="absolute bottom-10 left-10 z-20">
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.35em]" style={{ color: "#C9A96E70" }}>
+                  Gallery Signal
+                </p>
                 <h3 className="text-3xl font-serif mb-1 tracking-tight">{exhibitions[0].title}</h3>
                 <span className="text-[10px] text-zinc-500 tracking-[0.3em] uppercase font-bold">{exhibitions[0].category}</span>
               </div>
@@ -152,14 +171,21 @@ export default function BentoSection() {
             <Link href={`/exhibitions/${exhibitions[7].id}`}>
               <ParallaxImage src={exhibitions[7].heroImage!} alt={exhibitions[7].title} className="opacity-30 group-hover:opacity-60 transition-all duration-700" />
               <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center z-10">
+                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.35em]" style={{ color: "#C9A96E70" }}>
+                  Quietest Room
+                </p>
                 <h3 className="text-3xl font-serif mb-4 group-hover:scale-110 transition-all duration-700">{exhibitions[7].title}</h3>
                 <div className="w-8 h-[1px] group-hover:w-20 transition-all duration-700" style={{ background: "#C9A96E60" }} />
               </div>
             </Link>
           </div>
 
-          {/* ── Live Stream card — added holographic-fan object ── */}
-          <div className="md:col-span-3 md:row-span-1 relative group rounded-[40px] overflow-hidden bento-hover p-8 flex flex-col justify-between" style={{ background: "linear-gradient(135deg, #242424 0%, #161616 100%)", border: "1px solid #C9A96E20" }}>
+          {/* ── Visit ritual card ── */}
+          <Link
+            href="/bookmarks"
+            className="md:col-span-3 md:row-span-1 relative group rounded-[40px] overflow-hidden bento-hover p-8 flex flex-col justify-between"
+            style={{ background: "linear-gradient(135deg, #242424 0%, #161616 100%)", border: "1px solid #C9A96E20" }}
+          >
             {/* Faint gilded fan object */}
             <motion.div
               animate={{ rotate: [0, 5, 0, -5, 0], y: [0, -6, 0] }}
@@ -172,14 +198,28 @@ export default function BentoSection() {
               <span className="font-mono text-xs" style={{ color: "#C9A96E80" }}>05</span>
             </div>
             <div>
-              <h3 className="text-2xl font-serif mb-2">Live Stream</h3>
-              <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-bold">Ambient Gallery Lab</p>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.35em]" style={{ color: "#C9A96E70" }}>
+                Visit Ritual
+              </p>
+              <h3 className="mb-3 text-2xl font-serif">Build Your Night</h3>
+              <p className="text-sm leading-6 text-zinc-400">
+                Bookmark the works you want to revisit, carry them into a reservation flow, and
+                return with reviews after the show.
+              </p>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-[10px] text-zinc-400 uppercase font-mono">Status: Online</span>
+            <div className="space-y-2">
+              {["Save the work", "Reserve a slot", "Return to the archive"].map((step) => (
+                <div
+                  key={step}
+                  className="flex items-center justify-between border-t pt-2 text-[10px] font-bold uppercase tracking-[0.22em] text-zinc-400"
+                  style={{ borderColor: "rgba(201,169,110,0.12)" }}
+                >
+                  <span>{step}</span>
+                  <span style={{ color: "#C9A96E80" }}>→</span>
+                </div>
+              ))}
             </div>
-          </div>
+          </Link>
 
         </div>
       </div>

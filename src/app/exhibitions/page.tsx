@@ -9,7 +9,6 @@ import GlassCard from "../../components/GlassCard";
 import BackgroundGlow from "../../components/BackgroundGlow";
 import FilmGrain from "../../components/FilmGrain";
 import { motion } from "framer-motion";
-import BookmarkButton from "../../components/BookmarkButton";
 import { useBookmarks } from "../../hooks/useBookmarks";
 import { OrnamentalDivider, LaurelAccent, ClassicalNumber } from "../../components/ClassicalOrnament";
 
@@ -48,11 +47,11 @@ export default function ExhibitionsPage() {
               <div className="flex items-center gap-4">
                 <span className="w-8 h-[1px]" style={{ background: "#C9A96E60" }} />
                 <p className="text-[10px] uppercase tracking-[0.6em] font-bold" style={{ color: "#C9A96E80" }}>
-                  Registry 4.2 // Synergy Archive
+                  Current Edition // Season Archive
                 </p>
               </div>
               <h1 className="text-8xl md:text-[10vw] font-serif tracking-tighter leading-none font-bold uppercase">
-                Master<br /><span className="italic text-zinc-700">Registry</span>
+                Season<br /><span className="italic text-zinc-700">Registry</span>
               </h1>
               <LaurelAccent className="pt-2" />
               <OrnamentalDivider className="max-w-xs" />
@@ -115,7 +114,7 @@ export default function ExhibitionsPage() {
 
             {filtered.length === 0 && (
               <div className="py-32 text-center">
-                <p className="font-serif italic text-zinc-600 text-2xl">"{selectedCategory}" 카테고리에 해당하는 전시가 없습니다.</p>
+                <p className="font-serif italic text-zinc-600 text-2xl">&ldquo;{selectedCategory}&rdquo; 카테고리에 해당하는 전시가 없습니다.</p>
                 <button onClick={() => setSelectedCategory("All")} className="mt-8 text-[10px] uppercase tracking-[0.3em] font-bold transition-colors" style={{ color: "#C9A96E80" }}>
                   ← 전체 보기
                 </button>
@@ -249,10 +248,10 @@ export default function ExhibitionsPage() {
             </div>
             <OrnamentalDivider className="mb-10" />
             <p className="font-serif italic text-lg leading-relaxed text-zinc-600">
-              "The archive is not a grave for the past, but a lens for the future. Every item registered here carries the resonance of its digital twin."
+              &ldquo;The archive is not a grave for the past, but a lens for the future. Every item registered here carries the resonance of its digital twin.&rdquo;
             </p>
             <LaurelAccent color="#C9A96E40" className="justify-center" />
-            <p className="text-[10px] text-zinc-700 tracking-[0.5em] font-mono uppercase font-bold">Art Hub 4.2 Master Registry // Node: Verified</p>
+            <p className="text-[10px] text-zinc-700 tracking-[0.5em] font-mono uppercase font-bold">Art Arca Season Registry // Seoul Archive</p>
           </div>
         </footer>
       </AnimatedContainer>

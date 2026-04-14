@@ -10,7 +10,7 @@ export default function ReviewsList({ exhibitionId }: { exhibitionId: string }) 
   if (reviews.length === 0) {
     return (
       <div className="py-20 text-center border-t border-white/5">
-        <p className="text-xl font-serif italic text-zinc-600 mb-4">"The acoustic space is currently empty."</p>
+        <p className="text-xl font-serif italic text-zinc-600 mb-4">&ldquo;The acoustic space is currently empty.&rdquo;</p>
         <p className="text-[10px] uppercase tracking-[0.4em] text-zinc-800 font-mono font-bold">Waiting for the first resonance signal...</p>
       </div>
     );
@@ -52,13 +52,13 @@ export default function ReviewsList({ exhibitionId }: { exhibitionId: string }) 
                       year: "numeric",
                       month: "short",
                       day: "numeric",
-                    })} // Logged
+                    })} {" / "} Logged
                   </p>
                 </div>
                 <StarRating value={review.rating} readOnly size={12} />
               </div>
               <p className="text-lg font-light text-zinc-400 leading-relaxed italic mb-6">
-                "{review.text}"
+                &ldquo;{review.text}&rdquo;
               </p>
               <div className="flex items-center justify-between">
                  <div className="flex gap-2">

@@ -2,19 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SITE_NAME, STORAGE_KEYS } from "@/lib/site";
 
 export default function PageCurtain() {
   const [visible, setVisible] = useState(true);
   const [logoVisible, setLogoVisible] = useState(true);
 
   useEffect(() => {
+    const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Only show once per session
-    const shown = sessionStorage.getItem("art-hub-curtain");
-    if (shown) {
+    const shown = sessionStorage.getItem(STORAGE_KEYS.curtain);
+    if (shown || shouldReduceMotion) {
       setVisible(false);
+      sessionStorage.setItem(STORAGE_KEYS.curtain, "1");
       return;
     }
-    sessionStorage.setItem("art-hub-curtain", "1");
+    sessionStorage.setItem(STORAGE_KEYS.curtain, "1");
 
     // Logo fades out before curtain rises
     const logoTimer = setTimeout(() => setLogoVisible(false), 700);
@@ -56,13 +59,13 @@ export default function PageCurtain() {
                   className="tracking-[0.8em] text-sm uppercase font-serif"
                   style={{ color: "#C9A96E" }}
                 >
-                  Art Hub 4.2
+                  {SITE_NAME}
                 </span>
                 <span
                   className="tracking-[0.4em] text-[9px] uppercase font-sans"
                   style={{ color: "#C9A96E40" }}
                 >
-                  Synergy Edition
+                  Seoul Archive
                 </span>
               </motion.div>
             )}

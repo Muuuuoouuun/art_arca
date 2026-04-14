@@ -5,6 +5,7 @@ import BackgroundGlow from "../components/BackgroundGlow";
 import FilmGrain from "../components/FilmGrain";
 import HomeNav from "../components/home/HomeNav";
 import HeroSection from "../components/home/HeroSection";
+import EditorialBand from "../components/home/EditorialBand";
 import BentoSection from "../components/home/BentoSection";
 import ArchiveSection from "../components/home/ArchiveSection";
 import HomeFooter from "../components/home/HomeFooter";
@@ -14,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "bento", "curation", "footer"];
+      const sections = ["hero", "salon", "bento", "curation", "footer"];
       let current = "hero";
       sections.forEach((id) => {
         const el = document.getElementById(id);
@@ -28,7 +29,8 @@ export default function Home() {
       setActiveSection(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -36,15 +38,15 @@ export default function Home() {
     <div className="bg-[#0F0F0F] min-h-screen text-white font-sans selection:bg-white selection:text-black relative overflow-hidden">
       <FilmGrain />
 
-      <BackgroundGlow color="bg-purple-600" size="w-[800px] h-[800px]" className="top-[-200px] left-[-200px]" opacity={0.18} />
-      <BackgroundGlow color="bg-blue-600" size="w-[600px] h-[600px]" className="top-[40vh] right-[-100px]" opacity={0.15} />
-      <BackgroundGlow color="bg-indigo-800" size="w-[1000px] h-[1000px]" className="bottom-[-300px] left-[10%]" opacity={0.22} />
-      {/* Renaissance warm glow — gilded warmth cutting through the cold */}
-      <BackgroundGlow color="bg-amber-700" size="w-[600px] h-[600px]" className="top-[10vh] left-[25%]" opacity={0.05} />
+      <BackgroundGlow color="bg-amber-700" size="w-[760px] h-[760px]" className="top-[-180px] left-[-180px]" opacity={0.16} />
+      <BackgroundGlow color="bg-emerald-700" size="w-[560px] h-[560px]" className="top-[36vh] right-[-60px]" opacity={0.12} />
+      <BackgroundGlow color="bg-sky-800" size="w-[900px] h-[900px]" className="bottom-[-320px] left-[14%]" opacity={0.12} />
+      <BackgroundGlow color="bg-orange-800" size="w-[520px] h-[520px]" className="top-[12vh] left-[28%]" opacity={0.06} />
 
       <HomeNav activeSection={activeSection} />
       
       <HeroSection />
+      <EditorialBand />
       <BentoSection />
       <ArchiveSection />
       <HomeFooter />

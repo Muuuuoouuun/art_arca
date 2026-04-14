@@ -10,6 +10,10 @@
     --gold-light: #F0D89A;
     --gold-dark: #9A7A4A;
     --gold-muted: rgba(201, 169, 110, 0.15);
+    --paper: #F3EBDD;
+    --paper-shadow: #E6DAC7;
+    --ink: #171410;
+    --oxide: #5E7A73;
   }
 
   * {
@@ -20,13 +24,19 @@
 
   html {
     scroll-behavior: smooth;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
     overflow-x: hidden;
+    font-family: var(--font-inter), 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgba(201, 169, 110, 0.9);
+    outline-offset: 3px;
   }
 }
 
@@ -141,5 +151,23 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .paper-panel {
+    background: linear-gradient(180deg, rgba(243, 235, 221, 0.98), rgba(230, 218, 199, 0.96));
+  }
+
+  .hairline-gold {
+    border: 1px solid rgba(201, 169, 110, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-noise {
+    animation: none;
   }
 }

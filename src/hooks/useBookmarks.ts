@@ -2,10 +2,11 @@
 
 import { useCallback } from "react";
 import { useLocalStorage } from "./useLocalStorage";
+import { STORAGE_KEYS } from "@/lib/site";
 
 export function useBookmarks() {
-  const [bookmarks, setBookmarks] = useLocalStorage<string[]>("art-arca:bookmarks", []);
-  const [likes, setLikes] = useLocalStorage<string[]>("art-arca:likes", []);
+  const [bookmarks, setBookmarks] = useLocalStorage<string[]>(STORAGE_KEYS.bookmarks, []);
+  const [likes, setLikes] = useLocalStorage<string[]>(STORAGE_KEYS.likes, []);
 
   const toggleBookmark = useCallback(
     (id: string) => {
