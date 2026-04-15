@@ -13,6 +13,7 @@ const navItems = [
   { label: "Season", href: "#hero", section: "hero" },
   { label: "Briefing", href: "#salon", section: "salon" },
   { label: "Highlights", href: "#bento", section: "bento" },
+  { label: "Chapters", href: "#chapters", section: "chapters" },
   { label: "Archive", href: "#curation", section: "curation" },
   { label: "Guide", href: "/guide" },
   { label: "Saved", href: "/bookmarks" },
@@ -87,7 +88,7 @@ export default function HomeNav({ activeSection }: HomeNavProps) {
             })}
           </div>
 
-          <div className="hidden items-center gap-10 md:flex">
+          <div className="hidden items-center gap-6 md:flex lg:gap-8">
             {navItems.map((item) => {
               const active = item.section === activeSection;
               return (

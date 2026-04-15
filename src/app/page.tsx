@@ -7,6 +7,7 @@ import HomeNav from "../components/home/HomeNav";
 import HeroSection from "../components/home/HeroSection";
 import EditorialBand from "../components/home/EditorialBand";
 import BentoSection from "../components/home/BentoSection";
+import ChapterSection from "../components/home/ChapterSection";
 import ArchiveSection from "../components/home/ArchiveSection";
 import HomeFooter from "../components/home/HomeFooter";
 
@@ -15,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "salon", "bento", "curation", "footer"];
+      const sections = ["hero", "salon", "bento", "chapters", "curation", "footer"];
       let current = "hero";
       sections.forEach((id) => {
         const el = document.getElementById(id);
@@ -48,6 +49,7 @@ export default function Home() {
       <HeroSection />
       <EditorialBand />
       <BentoSection />
+      <ChapterSection />
       <ArchiveSection />
       <HomeFooter />
     </div>

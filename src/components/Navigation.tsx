@@ -10,6 +10,9 @@ import { SITE_NAME_UPPER } from "@/lib/site";
 const navLinks = [
   { href: "/exhibitions", label: "Registry" },
   { href: "/guide", label: "Guide" },
+  { href: "/events", label: "Agenda" },
+  { href: "/blog", label: "Journal" },
+  { href: "/community", label: "Community" },
   { href: "/bookmarks", label: "Saved" },
   { href: "/about", label: "System" },
 ];
@@ -30,7 +33,7 @@ export default function Navigation() {
           <span className="hidden sm:block text-zinc-500 font-sans text-[9px] tracking-[0.2em] border-l border-zinc-800 pl-4 py-1 uppercase font-bold">Seoul<br/>Archive</span>
         </motion.div>
         
-        <div className="hidden md:flex gap-12 items-center text-[10px] uppercase tracking-[0.2em] font-bold">
+        <div className="hidden md:flex gap-4 lg:gap-6 xl:gap-8 items-center text-[10px] uppercase tracking-[0.2em] font-bold">
           {navLinks.map((link) => (
             <Link 
               key={link.href}

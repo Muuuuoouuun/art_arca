@@ -80,8 +80,14 @@ export default function HomeFooter() {
               <Link href="/exhibitions" className="text-lg font-serif italic text-zinc-300 transition-colors hover:text-[#C9A96E]">
                 Current Season
               </Link>
-              <Link href="#curation" className="text-lg font-serif italic text-zinc-300 transition-colors hover:text-[#C9A96E]">
-                The Cabinet
+              <Link href="/events" className="text-lg font-serif italic text-zinc-300 transition-colors hover:text-[#C9A96E]">
+                Season Agenda
+              </Link>
+              <Link href="/blog" className="text-lg font-serif italic text-zinc-300 transition-colors hover:text-[#C9A96E]">
+                Field Journal
+              </Link>
+              <Link href="/community" className="text-lg font-serif italic text-zinc-300 transition-colors hover:text-[#C9A96E]">
+                Community
               </Link>
               <Link href="/bookmarks" className="text-lg font-serif italic text-zinc-300 transition-colors hover:text-[#C9A96E]">
                 Saved Works
