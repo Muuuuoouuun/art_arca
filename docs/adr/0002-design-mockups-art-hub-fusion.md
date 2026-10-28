@@ -1,6 +1,6 @@
 # ADR 0002 — Design mockups (시안) fusing art_hub and art_arca
 
-- Status: Proposed. The mockups are for review only, and no variant is adopted yet.
+- Status: Superseded in part by ADR 0003 (B chosen as direction, to be redesigned from scratch). The mockups remain for review only.
 - Date: 2026-10-28
 
 ## Context

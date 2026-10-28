@@ -46,6 +46,13 @@ export default function MockupsIndex() {
           </li>
         ))}
       </ul>
+      <p className="mt-12 text-sm text-white/70">
+        채택 방향: <strong>B</strong> (실제 버전은 처음부터 새로 디자인).{" "}
+        <Link href="/mockups/b-structure" className="underline hover:text-[#C9A96E]">
+          B 구조 와이어프레임 · 디자인 미적용
+        </Link>{" "}
+        — ⚠️ 디자인 작업이 매우 시급히 필요합니다.
+      </p>
     </div>
   );
 }
