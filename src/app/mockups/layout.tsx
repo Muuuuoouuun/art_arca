@@ -1,0 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Design mockups (시안) — Art Arca",
+  robots: { index: false, follow: false },
+};
+
+export default function MockupsLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
