@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import GlassCard from "../GlassCard";
 import { FloatingIconicObject, GlyphArtifact } from "../FloatingIconicObject";
 import { OrnamentalDivider, LaurelAccent } from "../ClassicalOrnament";
@@ -32,9 +32,11 @@ export default function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  // 스크롤 패럴랙스 하나만 남기고 스프링으로 부드럽게 한다(이전엔 패럴랙스 Y + 무한 상하 흔들림이 겹쳤다).
+  const rawHeroY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+  const heroY = useSpring(rawHeroY, { stiffness: 80, damping: 25, restDelta: 0.001 });
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   return (
     <section
@@ -58,11 +60,7 @@ export default function HeroSection() {
         style={{ y: heroY, opacity: heroOpacity, scale: heroScale }}
         className="pointer-events-none absolute right-[-34vw] top-[10rem] z-0 h-[50vh] w-[100vw] opacity-70 md:right-[-10vw] md:top-[10vh] md:h-[80vh] md:w-[60vw] md:opacity-100"
       >
-        <motion.div
-          animate={shouldReduceMotion ? undefined : { y: [0, -12, 0] }}
-          transition={shouldReduceMotion ? undefined : { duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="relative w-full h-full"
-        >
+        <div className="relative w-full h-full">
           <div className="absolute inset-0 z-10 pointer-events-none bg-radial-gradient from-amber-900/20 via-transparent to-transparent" />
           <Image
             src="/images/exhibitions/afrofuturism-disco-hero.jpg"
@@ -71,7 +69,7 @@ export default function HeroSection() {
             className="object-contain [mask-image:radial-gradient(ellipse_65%_75%_at_55%_45%,black_50%,transparent_85%)] drop-shadow-[0_0_120px_rgba(201,169,110,0.18)]"
             priority
           />
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* GlyphArtifacts left sidebar */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
@@ -25,9 +25,12 @@ export function FloatingIconicObject({
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [-depth, depth]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [-10, 10]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  // 스크롤 값을 스프링으로 걸러 휠 단위 끊김을 줄인다.
+  const rawY = useTransform(scrollYProgress, [0, 1], [-depth, depth]);
+  const y = useSpring(rawY, { stiffness: 60, damping: 20, restDelta: 0.001 });
+  const rawRotate = useTransform(scrollYProgress, [0, 1], [-8, 8]);
+  const rotate = useSpring(rawRotate, { stiffness: 60, damping: 25 });
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
 
   return (
     <motion.div
@@ -38,8 +41,8 @@ export function FloatingIconicObject({
       } ${className}`}
     >
       <motion.div
-        animate={{ y: [0, -18, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }}
         className="relative w-[300px] h-[300px] md:w-[600px] md:h-[600px] mix-blend-screen filter drop-shadow-[0_0_80px_rgba(255,255,255,0.25)]"
       >
         <Image

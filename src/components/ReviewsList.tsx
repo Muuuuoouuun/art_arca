@@ -34,7 +34,7 @@ export default function ReviewsList({ exhibitionId }: { exhibitionId: string }) 
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="sync">
           {reviews.map((review, i) => (
             <motion.div 
               key={review.id}

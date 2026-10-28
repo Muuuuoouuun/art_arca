@@ -33,42 +33,43 @@ export default function CustomCursor() {
     };
 
     const animateRing = () => {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
       ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
       raf = requestAnimationFrame(animateRing);
     };
     raf = requestAnimationFrame(animateRing);
 
-    const isClickable = (e: MouseEvent) =>
-      (e.target as HTMLElement).closest("a, button") !== null;
+    // 한 번의 mousemove 핸들러에서 클릭 가능 영역 진입/이탈을 판정한다.
+    // mouseover/mouseout은 자식 요소 사이를 오갈 때마다 발생해 링 크기가 깜빡였다.
+    let currentlyOverClickable = false;
 
-    const handleEnter = (e: MouseEvent) => {
-      if (!isClickable(e)) return;
-      ring.style.width = "3rem";
-      ring.style.height = "3rem";
-      ring.style.borderColor = "rgba(201,169,110,0.9)";
-      ring.style.boxShadow = "0 0 20px rgba(201,169,110,0.5)";
-      dot.style.opacity = "0";
+    const handleMove = (e: MouseEvent) => {
+      const overClickable = (e.target as HTMLElement).closest("a, button") !== null;
+      if (overClickable === currentlyOverClickable) return;
+      currentlyOverClickable = overClickable;
+
+      if (overClickable) {
+        ring.style.width = "2.8rem";
+        ring.style.height = "2.8rem";
+        ring.style.borderColor = "rgba(201,169,110,0.9)";
+        ring.style.boxShadow = "0 0 16px rgba(201,169,110,0.45)";
+        dot.style.opacity = "0";
+      } else {
+        ring.style.width = "2rem";
+        ring.style.height = "2rem";
+        ring.style.borderColor = "rgba(201,169,110,0.55)";
+        ring.style.boxShadow = "0 0 8px rgba(201,169,110,0.2)";
+        dot.style.opacity = "1";
+      }
     };
 
-    const handleLeave = (e: MouseEvent) => {
-      if (!isClickable(e)) return;
-      ring.style.width = "2rem";
-      ring.style.height = "2rem";
-      ring.style.borderColor = "rgba(201,169,110,0.55)";
-      ring.style.boxShadow = "0 0 8px rgba(201,169,110,0.2)";
-      dot.style.opacity = "1";
-    };
-
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleEnter);
-    window.addEventListener("mouseout", handleLeave);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
+    window.addEventListener("mousemove", handleMove, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleEnter);
-      window.removeEventListener("mouseout", handleLeave);
+      window.removeEventListener("mousemove", handleMove);
       cancelAnimationFrame(raf);
     };
   }, [enabled]);

@@ -52,25 +52,29 @@ export default function BentoSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[400px]">
 
           {/* ── Large hero card (col-span-8, row-span-2) ── */}
-          <div className="md:col-span-8 md:row-span-2 relative group rounded-[40px] overflow-hidden bg-[#0a0a0a] bento-hover border border-white/[0.09] classical-frame">
-            {/* Corner flourishes */}
-            <CornerFlourish corner="tl" size={48} className="absolute top-4 left-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <CornerFlourish corner="tr" size={48} className="absolute top-4 right-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <CornerFlourish corner="bl" size={48} className="absolute bottom-4 left-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <CornerFlourish corner="br" size={48} className="absolute bottom-4 right-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          {/* 바깥: group·hover만. overflow-hidden을 두지 않아 오브젝트가 카드 밖으로 나와도 잘리지 않는다. */}
+          <div className="md:col-span-8 md:row-span-2 relative group bento-hover">
+            {/* 안쪽 카드 껍데기: 둥근 모서리 클리핑과 배경 */}
+            <div className="absolute inset-0 rounded-[40px] overflow-hidden bg-[#0a0a0a] border border-white/[0.09] classical-frame">
+              {/* Corner flourishes */}
+              <CornerFlourish corner="tl" size={48} className="absolute top-4 left-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <CornerFlourish corner="tr" size={48} className="absolute top-4 right-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <CornerFlourish corner="bl" size={48} className="absolute bottom-4 left-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <CornerFlourish corner="br" size={48} className="absolute bottom-4 right-4 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-            <div className="absolute inset-0 z-0">
-              <ParallaxImage src={exhibitions[6].heroImage!} alt={exhibitions[6].title} className="opacity-70 group-hover:scale-105 transition-transform duration-1000 ease-out" />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
+              <div className="absolute inset-0 z-0">
+                <ParallaxImage src={exhibitions[6].heroImage!} alt={exhibitions[6].title} className="opacity-70 group-hover:scale-105 transition-transform duration-1000 ease-out" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10" />
 
-            <div className="absolute top-8 right-8 z-30">
-              <BookmarkButton exhibitionId={exhibitions[6].id} variant="card" />
+              <div className="absolute top-8 right-8 z-30">
+                <BookmarkButton exhibitionId={exhibitions[6].id} variant="card" />
+              </div>
             </div>
 
             <motion.div
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }}
               whileHover={{ y: -40, rotate: 8, scale: 1.15 }}
               className="absolute right-[-5%] top-[5%] w-[500px] h-[500px] z-20 pointer-events-none drop-shadow-[0_0_140px_rgba(255,255,255,0.45)]"
             >
@@ -105,8 +109,10 @@ export default function BentoSection() {
           </div>
 
           {/* ── Right tall card ── */}
-          <div className="md:col-span-4 md:row-span-2 relative group rounded-[40px] overflow-hidden border bento-hover" style={{ borderColor: "#C9A96E15" }}>
-            <div className="absolute inset-0 bg-zinc-900/50 backdrop-blur-xl z-0" />
+          <div className="md:col-span-4 md:row-span-2 relative group bento-hover">
+            <div className="absolute inset-0 rounded-[40px] overflow-hidden border" style={{ borderColor: "#C9A96E15" }}>
+              <div className="absolute inset-0 bg-zinc-900/50 backdrop-blur-xl z-0" />
+            </div>
             <div className="absolute top-8 right-8 z-30">
               <BookmarkButton exhibitionId={exhibitions[4].id} variant="card" />
             </div>
@@ -117,9 +123,9 @@ export default function BentoSection() {
                   <Image src={exhibitions[4].image!} alt={exhibitions[4].title} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
                 <motion.div
-                  animate={{ y: [0, -14, 0], rotate: [0, 3, 0, -3, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -right-4 -bottom-4 w-28 h-28 z-20 pointer-events-none drop-shadow-[0_0_30px_rgba(255,150,200,0.5)]"
+                  animate={{ y: [0, -10, 0], rotate: [0, 2, 0, -2, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }}
+                  className="absolute -right-6 -bottom-6 w-28 h-28 z-20 pointer-events-none drop-shadow-[0_0_30px_rgba(255,150,200,0.5)]"
                 >
                   <Image src="/images/objects/neon-norigae.webp" alt="Norigae Artifact" fill className="object-contain mix-blend-screen" />
                 </motion.div>
@@ -145,8 +151,8 @@ export default function BentoSection() {
             <Link href={`/exhibitions/${exhibitions[0].id}`}>
               <div className="absolute inset-0 flex items-center justify-center p-8">
                 <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", repeatType: "mirror" }}
                   className="relative z-10 h-[300px] w-[300px] drop-shadow-[0_0_60px_rgba(201,169,110,0.22)]"
                 >
                   <Image src="/images/objects/chrome-mask.webp" alt="Chrome Mask" fill className="object-contain mix-blend-screen group-hover:scale-110 transition-transform duration-700" />
